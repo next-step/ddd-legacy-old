@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class GuardTest {
 
-    @DisplayName("빈 문자열 또는 null을 입력할 경우 true를 반환한다.")
+    @DisplayName("빈 문자열 또는 null 을 입력할 경우 true 를 반환한다.")
     @NullAndEmptySource
     @ParameterizedTest
     void isNullOrBlank(final String value) {

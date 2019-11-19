@@ -10,7 +10,7 @@ public class StringExpression implements Expression {
 
     private static final Expression INVALID_EXPRESSION = new NullExpression();
 
-    private static final String DEFAULT_REGEX = ",";
+    private static final String DEFAULT_REGEX = "[,:]";
 
     private final List<Value> values;
 
