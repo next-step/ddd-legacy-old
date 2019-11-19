@@ -1,7 +1,8 @@
 package camp.nextstep.edu.racingcar;
 
 public class Car {
-    private final String name;
+
+    private final CarName name;
     private int position;
 
     Car(final String name) {
@@ -9,12 +10,11 @@ public class Car {
     }
 
     Car(final String name, final int position) {
-        validate(name);
-        this.name = name;
+        this.name = CarName.of(name);
         this.position = position;
     }
 
-    void move(final RandomMovingStrategy movingStrategy) {
+    void move(final MovingStrategy movingStrategy) {
         if (movingStrategy.movable()) {
             position++;
         }
@@ -22,11 +22,5 @@ public class Car {
 
     boolean isInPosition(final int position) {
         return this.position == position;
-    }
-
-    private void validate(final String name) {
-        if (name == null || name.length() > 5) {
-            throw new IllegalArgumentException();
-        }
     }
 }
