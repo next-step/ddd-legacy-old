@@ -14,7 +14,7 @@ public class Car {
         this.position = position;
     }
 
-    void move(final RandomMovingStrategy movingStrategy) {
+    void move(final MovingStrategy movingStrategy) {
         if (movingStrategy.movable()) {
             position++;
         }
@@ -23,6 +23,4 @@ public class Car {
     boolean isInPosition(final int position) {
         return this.position == position;
     }
-
-
 }

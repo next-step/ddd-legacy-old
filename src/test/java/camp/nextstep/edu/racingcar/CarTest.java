@@ -23,4 +23,32 @@ class CarTest {
     void create_greaterThanMaxNameLength() {
         assertThatIllegalArgumentException().isThrownBy(() -> new Car("a".repeat(CarName.MAX_LENGTH + 1)));
     }
+
+    @DisplayName("움직이면 자동차의 위치가 1 증가한다.")
+    @Test
+    void move_true() {
+        // given
+        final int defaultPosition = 0;
+        final Car car = new Car("name", defaultPosition);
+
+        // when
+        car.move(() -> true);
+
+        // then
+        assertThat(car.isInPosition(defaultPosition + 1)).isTrue();
+    }
+
+    @DisplayName("움직이지 못하면 위치가 바뀌지 않는다.")
+    @Test
+    void move_false() {
+        // given
+        final int defaultPosition = 0;
+        final Car car = new Car("name", defaultPosition);
+
+        // when
+        car.move(() -> false);
+
+        // then
+        assertThat(car.isInPosition(defaultPosition)).isTrue();
+    }
 }
