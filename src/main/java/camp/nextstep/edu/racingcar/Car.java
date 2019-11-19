@@ -14,7 +14,7 @@ public class Car {
         this.position = position;
     }
 
-    void move(final RandomMovingStrategy movingStrategy) {
+    void move(final MovingStrategy movingStrategy) {
         if (movingStrategy.movable()) {
             position++;
         }
@@ -25,7 +25,7 @@ public class Car {
     }
 
     private void validate(final String name) {
-        if (name == null || name.length() > 5) {
+        if (name == null || name.length() == 0 || name.length() > 5) {
             throw new IllegalArgumentException();
         }
     }
