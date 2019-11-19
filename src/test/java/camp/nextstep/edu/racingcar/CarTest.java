@@ -3,10 +3,10 @@ package camp.nextstep.edu.racingcar;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("자동차 객체에 대한 테스트")
 class CarTest {
@@ -51,5 +51,13 @@ class CarTest {
         car.move(new RandomMovingStrategy(new FixedNumberGenerator(position)));
         // then
         assertThat(car.isInPosition(position)).isTrue();
+    }
+
+    @DisplayName("자동차 이름이 null일 경우 IllegalArgumentException 예외를 발생한다")
+    @ParameterizedTest
+    @NullSource
+    void 자동차_이름이_null_일경우_IllegalArgumentException_예외를_발생한다(final String name) {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new Car(name));
     }
 }
