@@ -15,7 +15,7 @@ class CarTest {
 
     @DisplayName("자동차가 생성된다.")
     @ParameterizedTest
-    @ValueSource(strings = {"", "1", "12345"})
+    @ValueSource(strings = {"1", "12345"})
     void newCarTest(String name) {
         new Car(name, 0);
     }
@@ -24,6 +24,7 @@ class CarTest {
     @Test
     void nullNameCarTest() {
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new Car(null, 0));
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new Car("", 0));
     }
 
     @DisplayName("자동차 이름은 5 글자를 넘을 수 없다.")
