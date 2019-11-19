@@ -60,4 +60,11 @@ class CarTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Car(name));
     }
+
+    @DisplayName("자동차 이름이 빈 문자열일 경우 IllegalArgumentException 예외를 발생한다")
+    @Test
+    void 자동차_이름이_빈_문자열_일경우_IllegalArgumentException_예외를_발생한다() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new Car(""));
+    }
 }
