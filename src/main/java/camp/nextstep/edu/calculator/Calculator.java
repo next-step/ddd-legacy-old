@@ -5,11 +5,10 @@ class Calculator {
     private Calculator() {
     }
 
-    static int calculate(final String expression) {
-        if (Guard.isNullOrBlank(expression)) {
-            return Value.DEFAULT;
-        }
+    static int calculate(final String rawExpression) {
+        final Expression expression = StringExpression.of(rawExpression);
+        final Value result = expression.sumAll();
 
-        return Integer.parseInt(expression);
+        return result.toInt();
     }
 }

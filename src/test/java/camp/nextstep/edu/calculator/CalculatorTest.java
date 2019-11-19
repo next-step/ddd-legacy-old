@@ -2,6 +2,7 @@ package camp.nextstep.edu.calculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -31,5 +32,15 @@ class CalculatorTest {
         assertThat(result).isEqualTo(Integer.parseInt(source));
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"0,1|1", "1,2|3", "3,3|6", "8,100|108", "100,10,1000,1|1111"}, delimiter = '|')
+    @DisplayName("3. 숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다. (예 : “1,2”)")
+    void calculate_comma(final String source,
+                         final int expected) {
+        // when
+        final int result = Calculator.calculate(source);
 
+        // then
+        assertThat(result).isEqualTo(expected);
+    }
 }
