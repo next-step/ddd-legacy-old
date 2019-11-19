@@ -14,7 +14,7 @@ public class Car {
         this.position = position;
     }
 
-    void move(final RandomMovingStrategy movingStrategy) {
+    void move(final MovingStrategy movingStrategy) {
         if (movingStrategy.movable()) {
             position++;
         }
@@ -26,7 +26,7 @@ public class Car {
 
     private void validate(final String name) {
         if (name == null || name.length() > 5) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("자동차명은 5자 이하까지만 설정 가능합니다.");
         }
     }
 }
