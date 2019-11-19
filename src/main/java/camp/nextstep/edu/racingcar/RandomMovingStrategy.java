@@ -2,8 +2,13 @@ package camp.nextstep.edu.racingcar;
 
 import java.util.Random;
 
-public class RandomMovingStrategy {
-    boolean movable() {
-        return new Random().nextInt(9) >= 4;
+class RandomMovingStrategy implements MovingStrategy {
+
+    static final int MOVABLE_CONDITION = 4;
+    private static final int NUMBER_OF_MAX = 9;
+
+    @Override
+    public boolean movable() {
+        return new Random().nextInt(NUMBER_OF_MAX) >= MOVABLE_CONDITION;
     }
 }
