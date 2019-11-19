@@ -1,7 +1,8 @@
 package camp.nextstep.edu.racingcar;
 
 public class Car {
-    private final String name;
+
+    private final CarName name;
     private int position;
 
     Car(final String name) {
@@ -9,8 +10,7 @@ public class Car {
     }
 
     Car(final String name, final int position) {
-        validate(name);
-        this.name = name;
+        this.name = CarName.of(name);
         this.position = position;
     }
 
@@ -24,9 +24,5 @@ public class Car {
         return this.position == position;
     }
 
-    private void validate(final String name) {
-        if (name == null || name.length() > 5) {
-            throw new IllegalArgumentException();
-        }
-    }
+
 }
