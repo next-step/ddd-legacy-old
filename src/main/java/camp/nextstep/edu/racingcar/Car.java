@@ -29,4 +29,8 @@ public class Car {
             throw new IllegalArgumentException();
         }
     }
+
+    public boolean matchByName(String name) {
+        return this.name.equals(name);
+    }
 }
