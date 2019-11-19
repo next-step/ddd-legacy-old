@@ -1,6 +1,9 @@
 package camp.nextstep.edu.racingcar;
 
 public class Car {
+
+    static final int MOVE_CONDITION = 4;
+
     private final String name;
     private int position;
 
@@ -14,7 +17,7 @@ public class Car {
         this.position = position;
     }
 
-    void move(final RandomMovingStrategy movingStrategy) {
+    void move(final MovingStrategy movingStrategy) {
         if (movingStrategy.movable()) {
             position++;
         }
