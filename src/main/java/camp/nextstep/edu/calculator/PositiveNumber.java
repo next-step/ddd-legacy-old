@@ -4,7 +4,8 @@ public class PositiveNumber {
 
     static final int ZERO_VALUE = 0;
     static final PositiveNumber ZERO = new PositiveNumber(ZERO_VALUE);
-    private int number;
+
+    private final int number;
 
     private PositiveNumber(int number) {
         this.number = number;

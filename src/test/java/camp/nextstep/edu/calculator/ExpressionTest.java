@@ -5,8 +5,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static camp.nextstep.edu.calculator.Expression.DEFAULT_SEPARATOR;
 import static org.assertj.core.api.Assertions.assertThat;
