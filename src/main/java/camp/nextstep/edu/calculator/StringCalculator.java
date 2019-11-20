@@ -30,9 +30,17 @@ public class StringCalculator {
 
     private int getSum(String[] texts) {
         for (String text : texts) {
-            sum += Integer.parseInt(text);
+            sum += parse(text);
         }
         return sum;
+    }
+
+    private int parse(String text) {
+        int value = Integer.parseInt(text);
+        if (value <= 0) {
+            throw new RuntimeException();
+        }
+        return value;
     }
 
     private boolean isZero(String text) {
