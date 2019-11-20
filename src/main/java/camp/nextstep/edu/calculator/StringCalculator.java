@@ -14,6 +14,6 @@ public class StringCalculator implements Calculator {
         if(Objects.isNull(Strings.trimToNull(expression))){
             return ZERO;
         }
-        return ZERO;
+        return Integer.parseInt(expression);
     }
 }
