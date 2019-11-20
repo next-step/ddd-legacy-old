@@ -6,12 +6,10 @@ import java.util.Objects;
 
 public class StringCalculator implements Calculator {
 
-    static final int ZERO = 0;
-
     @Override
     public int add(String inputOfExpression) {
         if (Objects.isNull(Strings.trimToNull(inputOfExpression))) {
-            return ZERO;
+            return PositiveNumber.ZERO_VALUE;
         }
 
         Expression expression = Expression.of(inputOfExpression);
