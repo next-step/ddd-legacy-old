@@ -8,10 +8,10 @@ import static java.util.stream.Collectors.toList;
 
 public class StringExpression implements Expression {
 
-    private final List<Value> values;
+    private final List<Positive> positives;
 
-    private StringExpression(final List<Value> values) {
-        this.values = values;
+    private StringExpression(final List<Positive> positives) {
+        this.positives = positives;
     }
 
     static Expression of(final String expression) {
@@ -20,14 +20,14 @@ public class StringExpression implements Expression {
         }
 
         return Arrays.stream(Delimiter.delimit(expression))
-                .map(Value::of)
+                .map(Positive::of)
                 .collect(collectingAndThen(toList(), StringExpression::new));
     }
 
     @Override
-    public Value sumAll() {
-        return values.stream()
-                .reduce(Value::sum)
-                .orElse(Value.DEFAULT);
+    public Positive sumAll() {
+        return positives.stream()
+                .reduce(Positive::sum)
+                .orElse(Positive.DEFAULT);
     }
 }

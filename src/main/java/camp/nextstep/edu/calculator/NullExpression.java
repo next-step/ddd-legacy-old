@@ -4,7 +4,7 @@ enum NullExpression implements Expression {
     INSTANCE;
 
     @Override
-    public Value sumAll() {
-        return Value.DEFAULT;
+    public Positive sumAll() {
+        return Positive.DEFAULT;
     }
 }

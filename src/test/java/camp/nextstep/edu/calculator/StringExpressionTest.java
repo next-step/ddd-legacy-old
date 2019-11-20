@@ -91,8 +91,8 @@ class StringExpressionTest {
         final Expression expression = StringExpression.of(source);
 
         // when
-        final Value result = expression.sumAll();
-        final Value expected = Value.of(rawExpected);
+        final Positive result = expression.sumAll();
+        final Positive expected = Positive.of(rawExpected);
 
         // then
         assertThat(result).isEqualTo(expected);

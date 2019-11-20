@@ -4,21 +4,21 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.WeakHashMap;
 
-class Value {
+class Positive {
 
     static final int MIN = 0;
 
-    private static final Map<Integer, Value> CACHE = new WeakHashMap<>();
+    private static final Map<Integer, Positive> CACHE = new WeakHashMap<>();
 
-    static final Value DEFAULT = Value.of(MIN);
+    static final Positive DEFAULT = Positive.of(MIN);
 
     private final int value;
 
-    private Value(final int value) {
+    private Positive(final int value) {
         this.value = value;
     }
 
-    static Value of(final String source) {
+    static Positive of(final String source) {
         if (Guard.isNullOrBlank(source)) {
             return DEFAULT;
         }
@@ -26,15 +26,15 @@ class Value {
         return of(Integer.parseInt(source));
     }
 
-    static Value of(final int source) {
+    static Positive of(final int source) {
         validate(source);
 
-        return CACHE.computeIfAbsent(source, Value::new);
+        return CACHE.computeIfAbsent(source, Positive::new);
     }
 
     private static void validate(final int source) {
         if (source < MIN) {
-            throw new InsufficientValueException(source);
+            throw new NegativeValueException(source);
         }
     }
 
@@ -42,8 +42,8 @@ class Value {
         return value;
     }
 
-    static Value sum(final Value augend,
-                     final Value addend) {
+    static Positive sum(final Positive augend,
+                        final Positive addend) {
         return of(augend.value + addend.value);
     }
 
@@ -56,7 +56,7 @@ class Value {
             return false;
         }
 
-        final Value that = (Value) o;
+        final Positive that = (Positive) o;
         return value == that.value;
     }
 
@@ -67,7 +67,7 @@ class Value {
 
     @Override
     public String toString() {
-        return "Value{" +
+        return "Positive{" +
                 "value=" + value +
                 '}';
     }
