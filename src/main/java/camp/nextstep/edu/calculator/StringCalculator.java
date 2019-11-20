@@ -1,14 +1,16 @@
 package camp.nextstep.edu.calculator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringCalculator {
     private static final String SPLITTER = "\\,|\\:";
+    private static final Pattern PATTERN = Pattern.compile("//(.)\n(.*)");
 
     private int sum;
-    private Tokens tokens;
 
     public StringCalculator() {
         sum = 0;
-        tokens = new Tokens();
     }
 
     public int add(String text) {
@@ -19,6 +21,10 @@ public class StringCalculator {
     }
 
     private String[] split(String text) {
+        Matcher matcher = PATTERN.matcher(text);
+        if (matcher.find()) {
+            return matcher.group(2).split(matcher.group(1));
+        }
         return text.split(SPLITTER);
     }
 
