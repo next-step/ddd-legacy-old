@@ -1,6 +1,7 @@
 package camp.nextstep.edu.calculator;
 
-class NullExpression implements Expression {
+enum NullExpression implements Expression {
+    INSTANCE;
 
     @Override
     public Value sumAll() {

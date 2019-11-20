@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("입력 값 방어 테스트")
 class GuardTest {
 
     @DisplayName("빈 문자열 또는 null 을 입력할 경우 true 를 반환한다.")

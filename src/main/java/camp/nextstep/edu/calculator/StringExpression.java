@@ -8,10 +8,6 @@ import static java.util.stream.Collectors.toList;
 
 public class StringExpression implements Expression {
 
-    private static final Expression INVALID_EXPRESSION = new NullExpression();
-
-    private static final String DEFAULT_REGEX = "[,:]";
-
     private final List<Value> values;
 
     private StringExpression(final List<Value> values) {
@@ -20,10 +16,10 @@ public class StringExpression implements Expression {
 
     static Expression of(final String expression) {
         if (Guard.isNullOrBlank(expression)) {
-            return INVALID_EXPRESSION;
+            return NullExpression.INSTANCE;
         }
 
-        return Arrays.stream(expression.split(DEFAULT_REGEX))
+        return Arrays.stream(Delimiter.delimit(expression))
                 .map(Value::of)
                 .collect(collectingAndThen(toList(), StringExpression::new));
     }

@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("계산 값 테스트")
 class ValueTest {
 
     @DisplayName("string 으로 생성한다.")
