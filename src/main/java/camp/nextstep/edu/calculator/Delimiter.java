@@ -11,6 +11,9 @@ class Delimiter {
     private static final int DELIMITER_INDEX = 1;
     private static final int EXPRESSION_INDEX = 2;
 
+    private Delimiter() {
+    }
+
     static String[] delimit(final String source) {
         validate(source);
 

@@ -1,6 +1,7 @@
 package camp.nextstep.edu.calculator;
 
 enum NullExpression implements Expression {
+
     INSTANCE;
 
     @Override
