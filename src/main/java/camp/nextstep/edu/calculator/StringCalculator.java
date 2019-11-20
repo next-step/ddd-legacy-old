@@ -7,17 +7,17 @@ public class StringCalculator {
     private static final String SPLITTER = "\\,|\\:";
     private static final Pattern PATTERN = Pattern.compile("//(.)\n(.*)");
 
-    private int sum;
+    private Sum sum;
 
     public StringCalculator() {
-        sum = 0;
+        sum = new Sum(0);
     }
 
     public int add(String text) {
         if (isZero(text)) {
             return 0;
         }
-        return sum += getSum(split(text));
+        return getSum(split(text)).print();
     }
 
     private String[] split(String text) {
@@ -28,9 +28,9 @@ public class StringCalculator {
         return text.split(SPLITTER);
     }
 
-    private int getSum(String[] texts) {
+    private Sum getSum(String[] texts) {
         for (String text : texts) {
-            sum += parse(text);
+            sum.add(parse(text));
         }
         return sum;
     }
