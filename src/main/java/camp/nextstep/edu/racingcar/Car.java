@@ -1,5 +1,7 @@
 package camp.nextstep.edu.racingcar;
 
+import org.springframework.util.StringUtils;
+
 public class Car {
     private final String name;
     private int position;
@@ -25,8 +27,12 @@ public class Car {
     }
 
     private void validate(final String name) {
-        if (name == null || name.length() > 5) {
+        if (StringUtils.isEmpty(name) || name.length() > 5) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public boolean matchByName(String name) {
+        return this.name.equals(name);
     }
 }
