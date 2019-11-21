@@ -27,4 +27,11 @@ class CalculatorTest {
         Assertions.assertThat(calculator.add(null))
                 .isEqualTo(0);
     }
+
+    @DisplayName("숫자 하나를 입력할 경우 해당 숫자를 반환한다")
+    @Test
+    void inputIsOneNumber() {
+        Assertions.assertThat(calculator.add("1"))
+                .isEqualTo(1);
+    }
 }
