@@ -35,14 +35,23 @@ public class Calculator {
     private int getSum(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
-            sum += Integer.parseInt(number);
+            sum += getPositiveNumber(number);
         }
         return sum;
+    }
+
+    private int getPositiveNumber(String number) {
+        int parsedNumber = Integer.parseInt(number);
+
+        if (parsedNumber < 0) {
+            throw new RuntimeException();
+        }
+
+        return parsedNumber;
     }
 
     private boolean isEmptyString(String str) {
         return Objects.isNull(str) || str.isEmpty();
     }
-
 
 }

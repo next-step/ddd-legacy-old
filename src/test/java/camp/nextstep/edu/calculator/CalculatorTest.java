@@ -59,4 +59,13 @@ class CalculatorTest {
         Assertions.assertThat(calculator.add("//;\n1;2;3"))
                 .isEqualTo(6);
     }
+
+    @DisplayName("음수가 입력된 경우는 RuntimeException 발생")
+    @Test
+    void exceptionWhenNegativeNumber() {
+        Assertions.assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> {
+                    calculator.add("1,2:-3");
+                });
+    }
 }
