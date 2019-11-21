@@ -9,7 +9,17 @@ public class Calculator {
             return 0;
         }
 
-        return Integer.parseInt(input);
+        String[] numbers = input.split("\\,|\\:");
+
+        return getSum(numbers);
+    }
+
+    private int getSum(String[] numbers) {
+        int sum = 0;
+        for (String number : numbers) {
+            sum += Integer.parseInt(number);
+        }
+        return sum;
     }
 
     private boolean isEmptyString(String str) {

@@ -34,4 +34,11 @@ class CalculatorTest {
         Assertions.assertThat(calculator.add("1"))
                 .isEqualTo(1);
     }
+
+    @DisplayName("숫자 두개를 컴마 구분자로 입력할 경우 합을 반환한다")
+    @Test
+    void inputIsTwoNumbers() {
+        Assertions.assertThat(calculator.add("1,2"))
+                .isEqualTo(3);
+    }
 }
