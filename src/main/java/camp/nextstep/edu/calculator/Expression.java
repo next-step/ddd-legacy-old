@@ -4,13 +4,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Expression {
-    private static final int MINUS_INDEX = 1;
     private static final String DELIMITER = "\\,|\\:";
     private static final String[] NULL_EXPRESSION = new String[]{};
     private static final Pattern PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final int SPLIT_CUSTOM_DELIMITER = 1;
     private static final int SPLIT_CUSTOM_EXPRESSION = 2;
-    private int lastValueIndex;
     private String[] validExpressions;
     private String expression;
     private String customDelimiter;
@@ -18,7 +16,6 @@ public class Expression {
     private Expression(final String expression) {
         this.expression = expression;
         this.validExpressions = split();
-        this.lastValueIndex = this.validExpressions.length - MINUS_INDEX;
         System.out.println(this.toString());
     }
 
