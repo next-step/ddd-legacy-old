@@ -52,9 +52,9 @@ class StringCalculatorTest {
             Arguments.of("//;\n1", 1),
             Arguments.of("//;\n1;2", 3),
             Arguments.of("//;\n1;2;3", 6),
-            Arguments.of("//|\n1", 1),
-            Arguments.of("//|\n1|2", 3),
-            Arguments.of("//|\n1|2|3", 6)
+            Arguments.of("//\\|\n1", 1),
+            Arguments.of("//\\|\n1|2", 3),
+            Arguments.of("//\\|\n1|2|3", 6)
         );
     }
 
