@@ -7,7 +7,7 @@ import org.springframework.util.StringUtils;
 
 public class StringCalculator {
 
-    public int calc(String source) {
+    public int calculate(String source) {
         StringFormula formula = StringFormula.parse(source);
 
         String[] operands = formula.extractOperands();

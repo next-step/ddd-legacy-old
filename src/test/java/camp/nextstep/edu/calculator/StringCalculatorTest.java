@@ -24,7 +24,7 @@ class StringCalculatorTest {
     @ParameterizedTest
     @NullAndEmptySource
     void emptyCase(String source) {
-        assertThat(calculator.calc(source)).isEqualTo(0);
+        assertThat(calculator.calculate(source)).isEqualTo(0);
     }
 
     private static Stream<Arguments> defaultCase() {
@@ -44,7 +44,7 @@ class StringCalculatorTest {
     @DisplayName("기본 구분자(',',':') 를 통한 합산")
     @ParameterizedTest
     void defaultSum(String source, int expected) {
-        assertThat(calculator.calc(source)).isEqualTo(expected);
+        assertThat(calculator.calculate(source)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> customCase() {
@@ -63,7 +63,7 @@ class StringCalculatorTest {
     @DisplayName("커스텀 구분자를 통한 합산")
     @ParameterizedTest
     void customSum(String source, int expected) {
-        assertThat(calculator.calc(source)).isEqualTo(expected);
+        assertThat(calculator.calculate(source)).isEqualTo(expected);
     }
 
     @DisplayName("구분자를 통해 제공된 양의 정수가 아닐 때 RunTImeException 예외를 반환")
@@ -76,6 +76,6 @@ class StringCalculatorTest {
         "1,a,3"
     })
     void invalidChar(String source) {
-        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> calculator.calc(source));
+        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> calculator.calculate(source));
     }
 }
