@@ -1,15 +1,15 @@
 package camp.nextstep.edu.calculator;
 
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class Expression {
     private static final int MINUS_INDEX = 1;
     private static final String DELIMITER = "\\,|\\:";
     private static final String[] NULL_EXPRESSION = new String[]{};
     private static final Pattern PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final int SPLIT_CUSTOM_DELIMITER = 1;
+    private static final int SPLIT_CUSTOM_EXPRESSION = 2;
     private int lastValueIndex;
     private String[] validExpressions;
     private String expression;
@@ -43,8 +43,8 @@ public class Expression {
     private boolean isCustomDelimiter(String expression) {
         Matcher matcher = PATTERN.matcher(expression);
         if (matcher.find()) {
-            this.expression = matcher.group(2);
-            this.customDelimiter = matcher.group(1);
+            this.expression = matcher.group(SPLIT_CUSTOM_EXPRESSION);
+            this.customDelimiter = matcher.group(SPLIT_CUSTOM_DELIMITER);
             return true;
         }
         return false;
@@ -54,10 +54,4 @@ public class Expression {
         return this.expression == null || this.expression.isEmpty();
     }
 
-    @Override
-    public String toString() {
-        return "lastValueIndex: " + lastValueIndex + ", validExpression: "
-                + Arrays.stream(validExpressions).collect(Collectors.joining("+"))
-                + ", expression: " + expression + ", []size: " + validExpressions.length;
-    }
 }

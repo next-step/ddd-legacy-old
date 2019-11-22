@@ -11,7 +11,6 @@ public class Numbers {
         for (String expressionItem : expression.getExpressions()) {
             numbers.add(Number.of(expressionItem));
         }
-        System.out.println("text: " + text + ", size:" + numbers.size() + ", sum: " + toSumInt() + "\n");
         return this;
     }
 
