@@ -49,12 +49,12 @@ class StringCalculatorTest {
 
     private static Stream<Arguments> customCase() {
         return Stream.of(
-            Arguments.of("//;\\n1", 1),
-            Arguments.of("//;\\n1;2", 3),
-            Arguments.of("//;\\n1;2;3", 6),
-            Arguments.of("//|\\n1", 1),
-            Arguments.of("//|\\n1|2", 3),
-            Arguments.of("//|\\n1|2|3", 6)
+            Arguments.of("//;\n1", 1),
+            Arguments.of("//;\n1;2", 3),
+            Arguments.of("//;\n1;2;3", 6),
+            Arguments.of("//|\n1", 1),
+            Arguments.of("//|\n1|2", 3),
+            Arguments.of("//|\n1|2|3", 6)
         );
     }
 
@@ -71,7 +71,7 @@ class StringCalculatorTest {
         "a",
         "*",
         "-1",
-        "//;\\n1;a;3",
+        "//;\n1;a;3",
         "1,a,3"
     })
     void invalidChar(String source) {
