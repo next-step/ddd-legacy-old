@@ -15,18 +15,14 @@ class ExpressionTest {
     @ParameterizedTest
     @NullAndEmptySource
     void emptyOrNull(final String text) {
-        System.out.println(" --- emptyOrNull start --- ");
         assertThat(StringCalculator.get().add(text)).isZero();
-        System.out.println(" --- emptyOrNull end --- ");
     }
 
     @DisplayName(value = "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.")
     @ParameterizedTest
     @ValueSource(strings = {"1"})
     void oneNumber(final String text) {
-        System.out.println(" --- oneNumber start --- ");
         assertThat(StringCalculator.get().add(text)).isEqualTo(1);
-        System.out.println(" --- oneNumber end --- ");
     }
 
     @DisplayName(value = "숫자 두개를 쉼표(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.")
@@ -40,27 +36,21 @@ class ExpressionTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2:3"})
     void colons(final String text) {
-        System.out.println(" --- colons start --- ");
         assertThat(StringCalculator.get().add(text)).isSameAs(6);
-        System.out.println(" --- colons end --- ");
     }
 
     @DisplayName(value = "//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다.")
     @ParameterizedTest
     @ValueSource(strings = {"//;\n1;2;3"})
     void customDelimiter(final String text) {
-        System.out.println(" --- customDelimiter start --- ");
         assertThat(StringCalculator.get().add(text)).isSameAs(6);
-        System.out.println(" --- customDelimiter end --- ");
     }
 
     @DisplayName(value = "문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다.")
     @Test
     void negative() {
-        System.out.println(" --- negative start --- ");
         assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> StringCalculator.get().add("-1"));
-        System.out.println(" --- negative end --- ");
     }
 
 }
