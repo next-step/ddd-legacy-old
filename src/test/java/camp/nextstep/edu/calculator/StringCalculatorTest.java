@@ -32,16 +32,16 @@ class StringCalculatorTest {
             Arguments.of("1", 1),
             Arguments.of("1,2", 3),
             Arguments.of("1,2,3", 6),
-            Arguments.of("1;2", 3),
-            Arguments.of("1;2;3", 6),
-            Arguments.of("1,2;3", 6),
-            Arguments.of("1;2,3", 6),
-            Arguments.of("1;2,3;4,5", 15)
+            Arguments.of("1:2", 3),
+            Arguments.of("1:2:3", 6),
+            Arguments.of("1,2:3", 6),
+            Arguments.of("1:2,3", 6),
+            Arguments.of("1:2,3:4,5", 15)
         );
     }
 
     @MethodSource("defaultCase")
-    @DisplayName("기본 구분자(',',';') 를 통한 합산")
+    @DisplayName("기본 구분자(',',':') 를 통한 합산")
     @ParameterizedTest
     void defaultSum(String source, int expected) {
         assertThat(calculator.calc(source)).isEqualTo(expected);
@@ -68,11 +68,11 @@ class StringCalculatorTest {
     @DisplayName("구분자를 통해 제공된 양의 정수가 아닐 때 RunTImeException 예외를 반환")
     @ParameterizedTest
     @ValueSource(strings = {
-        "a","*","-1",
+        "a",
+        "*",
+        "-1",
         "//;\\n1;a;3",
-        "1;a;3",
-        "1,a;3",
-        "1;a;3",
+        "1,a,3"
     })
     void invalidChar(String source) {
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> calculator.calc(source));
