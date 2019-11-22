@@ -14,7 +14,7 @@ class StringAdderTest {
         final String expression = null;
 
         // when
-        final int result = StringAdder.calculate(expression);
+        final int result = StringAdder.calculate(new Expression(expression));
 
         // then
         assertThat(result).isEqualTo(0);
@@ -27,7 +27,7 @@ class StringAdderTest {
         final String expression = "";
 
         // when
-        final int result = StringAdder.calculate(expression);
+        final int result = StringAdder.calculate(new Expression(expression));
 
         // then
         assertThat(result).isEqualTo(0);
