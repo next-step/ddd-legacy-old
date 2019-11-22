@@ -17,16 +17,8 @@ public class StringCalculator {
 
     private int sum(String[] operands) {
         return Arrays.stream(operands)
-            .mapToInt(StringCalculator::parsePositiveInt)
+            .mapToInt(PositiveNumberUtils::parsePositiveInt)
             .sum();
-    }
-
-    private static int parsePositiveInt(String s) throws NumberFormatException {
-        int i = Integer.parseInt(s);
-        if(i < 0) {
-            throw new NumberFormatException("It is not positive numbers. string: \"" + s + "\"");
-        }
-        return i;
     }
 
     static class StringFormula {
@@ -34,7 +26,7 @@ public class StringCalculator {
         private static final String DELIMITER_REGEX = "[,:]";
         private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.*)\n(.*)");
         static final StringFormula EMPTY = new StringFormula(DELIMITER_REGEX, "");
-        public static final String[] EMPTY_OPERANDS = new String[0];
+        static final String[] EMPTY_OPERANDS = new String[0];
 
         private String delimiter;
         private String formula;
