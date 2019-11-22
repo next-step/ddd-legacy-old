@@ -49,6 +49,7 @@ class StringCalculatorTest {
 
     private static Stream<Arguments> customCase() {
         return Stream.of(
+            Arguments.of("//;\n", 0),
             Arguments.of("//;\n1", 1),
             Arguments.of("//;\n1;2", 3),
             Arguments.of("//;\n1;2;3", 6),
