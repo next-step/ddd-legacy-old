@@ -10,10 +10,6 @@ public class StringCalculator {
     public int calc(String source) {
         StringFormula formula = StringFormula.parse(source);
 
-        if(formula.isEmpty()) {
-            return 0;
-        }
-
         String[] operands = formula.extractOperands();
 
         return sum(operands);
@@ -34,9 +30,11 @@ public class StringCalculator {
     }
 
     static class StringFormula {
+
         private static final String DELIMITER_REGEX = "[,:]";
         private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.*)\n(.*)");
         static final StringFormula EMPTY = new StringFormula(DELIMITER_REGEX, "");
+        public static final String[] EMPTY_OPERANDS = new String[0];
 
         private String delimiter;
         private String formula;
@@ -62,6 +60,9 @@ public class StringCalculator {
         }
 
         String[] extractOperands() {
+            if (isEmpty()) {
+                return EMPTY_OPERANDS;
+            }
             return formula.split(delimiter);
         }
     }
