@@ -14,7 +14,15 @@ public class StringCalculator {
         String[] split = source.split(DELIMITER_REGEX);
 
         return Arrays.stream(split)
-            .mapToInt(Integer::parseInt)
+            .mapToInt(StringCalculator::parsePositiveInt)
             .sum();
+    }
+
+    private static int parsePositiveInt(String s) throws NumberFormatException {
+        int i = Integer.parseInt(s);
+        if(i < 0) {
+            throw new NumberFormatException("It is not positive numbers. string: \"" + s + "\"");
+        }
+        return i;
     }
 }
