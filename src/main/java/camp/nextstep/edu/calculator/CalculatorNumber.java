@@ -1,5 +1,7 @@
 package camp.nextstep.edu.calculator;
 
+import java.util.Objects;
+
 public class CalculatorNumber {
     static final CalculatorNumber ZERO = new CalculatorNumber(0);
 
@@ -34,5 +36,18 @@ public class CalculatorNumber {
 
     public int toInt() {
         return this.value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CalculatorNumber number = (CalculatorNumber) o;
+        return value == number.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }
