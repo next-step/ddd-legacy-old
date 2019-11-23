@@ -5,28 +5,36 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
-    private static final String DELIMITER = "[,:]";
+    private static final String DEFAULT_DELIMITER = "[,:]";
     private static final String REGEX = "//(.)\n(.*)";
 
+    private static final int DEFAULT_VALUE = 0;
+
     public int add(String input) {
-        if (input == null || input.isEmpty())
-            return 0;
+        if (isEmpty(input))
+            return DEFAULT_VALUE;
 
+        String[] numbers = parse(input);
+        return sum(numbers);
+    }
 
+    private boolean isEmpty(String input) {
+        return input == null || input.isEmpty();
+    }
+
+    private String[] parse(String input) {
         Pattern pattern = Pattern.compile(REGEX);
         Matcher matcher = pattern.matcher(input);
 
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
-            String[] tokens = matcher.group(2).split(customDelimiter);
-
-            return Arrays.stream(tokens)
-                    .mapToInt(Integer::parseInt)
-                    .sum();
+            return matcher.group(2).split(customDelimiter);
         }
 
-        String[] numbers = input.split(DELIMITER);
+        return input.split(DEFAULT_DELIMITER);
+    }
 
+    private int sum(String[] numbers) {
         return Arrays.stream(numbers)
                 .mapToInt(Integer::parseInt)
                 .sum();
