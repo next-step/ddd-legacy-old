@@ -29,27 +29,8 @@ public class Calculator {
                 .sum();
     }
 
-    private int parsePositiveNumber(String s) {
-        int number = Integer.parseInt(s);
-        if (isNegativeNumber(number)) {
-            throw new IllegalArgumentException(NOT_ALLOWED_NEGATIVE_NUMBER_EXCEPTION_MESSAGE);
-        }
-        return number;
-    }
-
     private boolean isEmpty(String str) {
         return StringUtils.isEmpty(StringUtils.trimWhitespace(str));
-    }
-
-    private boolean isNegativeNumber(int number) {
-        return number < 0;
-    }
-
-    private String getDelimiter(String str) {
-        if (hasCustomDelimiter(str)) {
-            return extract(str, CUSTOM_DELIMITER_POSITION);
-        }
-        return ",|:";
     }
 
     private String getExpressionWithDelimiter(String str) {
@@ -59,11 +40,31 @@ public class Calculator {
         return str;
     }
 
-    private String extract(String str, String position) {
-        return str.replaceAll(EXPRESSION_WITH_CUSTOM_DELIMITER_REG_EXP, position);
+    private String getDelimiter(String str) {
+        if (hasCustomDelimiter(str)) {
+            return extract(str, CUSTOM_DELIMITER_POSITION);
+        }
+        return ",|:";
     }
 
     private boolean hasCustomDelimiter(String str) {
         return Pattern.matches(EXPRESSION_WITH_CUSTOM_DELIMITER_REG_EXP, str);
     }
+
+    private String extract(String str, String position) {
+        return str.replaceAll(EXPRESSION_WITH_CUSTOM_DELIMITER_REG_EXP, position);
+    }
+
+    private int parsePositiveNumber(String s) {
+        int number = Integer.parseInt(s);
+        if (isNegativeNumber(number)) {
+            throw new IllegalArgumentException(NOT_ALLOWED_NEGATIVE_NUMBER_EXCEPTION_MESSAGE);
+        }
+        return number;
+    }
+
+    private boolean isNegativeNumber(int number) {
+        return number < 0;
+    }
+
 }
