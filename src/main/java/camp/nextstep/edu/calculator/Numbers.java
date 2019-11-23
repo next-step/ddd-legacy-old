@@ -10,12 +10,12 @@ public class Numbers {
         numbers = new ArrayList<>();
     }
 
-    public Numbers(List<Number> numbers) {
+    public Numbers(final List<Number> numbers) {
         this.numbers = numbers;
     }
 
     public Numbers add(String text) {
-        Expression expression = Expression.of(text);
+        final Expression expression = Expression.of(text);
         for (String expressionItem : expression.getExpressions()) {
             numbers.add(Number.of(expressionItem));
         }

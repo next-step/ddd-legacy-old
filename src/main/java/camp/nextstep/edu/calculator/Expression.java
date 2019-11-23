@@ -22,12 +22,12 @@ public class Expression {
         return this.validExpressions;
     }
 
-    private String[] split(String expression) {
+    private String[] split(final String expression) {
         if (isNullExpression(expression)) {
             return StringUtil.NULL_EXPRESSION;
         }
 
-        Matcher matcher = PATTERN.matcher(expression);
+        final Matcher matcher = PATTERN.matcher(expression);
         if (StringUtil.isCustomDelimiter(matcher)) {
             return StringUtil.splitByCustomDelimiter(
                     matcher.group(SPLIT_CUSTOM_EXPRESSION), matcher.group(SPLIT_CUSTOM_DELIMITER));
@@ -35,7 +35,7 @@ public class Expression {
         return StringUtil.splitByDefaultDelimiter(expression);
     }
 
-    private boolean isNullExpression(String expression) {
+    private boolean isNullExpression(final String expression) {
         return expression == null || expression.isEmpty();
     }
 
