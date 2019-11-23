@@ -1,17 +1,21 @@
 package camp.nextstep.edu.calculator;
 
-public class DefaultStringSplitStrategy extends CustomStringSplitStrategy {
-    private static final DefaultStringSplitStrategy INSTANCE = new DefaultStringSplitStrategy();
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Pattern;
 
-    DefaultStringSplitStrategy() {
-        this(new String[]{":",","});
+public class DefaultStringSplitStrategy implements StringSplitStrategy {
+    private static final DefaultStringSplitStrategy DEFAULT = new DefaultStringSplitStrategy();
+    private final Pattern splitRegex = Pattern.compile(":|,");
+
+    private DefaultStringSplitStrategy(){}
+
+    public static DefaultStringSplitStrategy getInstance(){
+        return DEFAULT;
     }
 
-    private DefaultStringSplitStrategy(String[] splitStrings) {
-        super(splitStrings);
-    }
-
-    public static StringSplitStrategy getInstance() {
-        return INSTANCE;
+    @Override
+    public List<String> apply(String input) {
+        return Arrays.asList(splitRegex.split(input));
     }
 }

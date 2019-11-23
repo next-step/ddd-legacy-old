@@ -44,7 +44,8 @@ class CustomStringSplitStrategyTest {
         return Stream.of(
             arguments(new String[]{";"}, "a;b", Arrays.asList("a","b")),
             arguments(new String[]{";", "!"}, "a;b!c", Arrays.asList("a","b","c")),
-            arguments(new String[]{"|", "~"}, "ab|cd~ef",  Arrays.asList("ab","cd","ef"))
+            arguments(new String[]{"|", "~"}, "ab|cd~ef",  Arrays.asList("ab","cd","ef")),
+            arguments(new String[]{";"}, "//;\n1;2;3",  Arrays.asList("1","2","3"))
         );
     }
 

@@ -19,7 +19,11 @@ public class PositiveNumber {
     }
 
     public static PositiveNumber parse(String input) {
-        return new PositiveNumber(Integer.parseInt(input));
+        try {
+            return new PositiveNumber(Integer.parseInt(input));
+        }catch (NumberFormatException e){
+            throw new IllegalArgumentException("input must be number");
+        }
     }
 
     public static PositiveNumber parse(Integer input) {
@@ -40,6 +44,9 @@ public class PositiveNumber {
     }
     public boolean isSame(PositiveNumber other){
         return other != null && this.value == other.value;
+    }
+    public boolean isSameAs(Integer other){
+        return other!=null && this.value == other;
     }
     public long value(){
         return this.value;
