@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class DefaultStringSplitStrategy implements StringSplitStrategy {
     private static final DefaultStringSplitStrategy DEFAULT = new DefaultStringSplitStrategy();
-    private final Pattern splitRegex = Pattern.compile(":|,");
+    private static final Pattern DEFAULT_SPLIT_PATTERN = Pattern.compile(":|,");
 
     private DefaultStringSplitStrategy(){}
 
@@ -16,6 +16,6 @@ public class DefaultStringSplitStrategy implements StringSplitStrategy {
 
     @Override
     public List<String> apply(String input) {
-        return Arrays.asList(splitRegex.split(input));
+        return Arrays.asList(DEFAULT_SPLIT_PATTERN.split(input));
     }
 }

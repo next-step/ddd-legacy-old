@@ -17,7 +17,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class PositiveNumberTest {
 
-    @DisplayName("0 이상의 숫자를 받아 PositiveNubmer 생성")
+    @DisplayName("0 이상의 숫자를 받아 PositiveNumber 생성")
     @ParameterizedTest
     @ValueSource(ints = {0, 1, Integer.MAX_VALUE})
     void parse_given_ints(int testInput) {
@@ -25,7 +25,7 @@ class PositiveNumberTest {
         assertThat(result.value()).isEqualTo(testInput);
     }
 
-    @DisplayName("음수로 PositiveNubmer 생성 볼가능")
+    @DisplayName("음수로 PositiveNumber 생성 볼가능")
     @ParameterizedTest
     @ValueSource(ints = {-1, Integer.MIN_VALUE})
     void parse_given_negative_ints(int testInput) {
@@ -34,7 +34,7 @@ class PositiveNumberTest {
         );
     }
 
-    @DisplayName("0 이상의 숫자 문자열을 받아 PositiveNubmer 생성")
+    @DisplayName("0 이상의 숫자 문자열을 받아 PositiveNumber 생성")
     @ParameterizedTest
     @ValueSource(strings = {"0", "1", "10000000"})
     void parse_given_strings(String testInput) {
@@ -42,7 +42,7 @@ class PositiveNumberTest {
         assertThat(result.value()).isEqualTo(Long.parseLong(testInput));
     }
 
-    @DisplayName("음수 문자열로 PositiveNubmer 생성 볼가능")
+    @DisplayName("음수 문자열로 PositiveNumber 생성 볼가능")
     @ParameterizedTest
     @ValueSource(strings = {"-1", "-10000000"})
     void parse_given_negative_number_strings(String testInput) {
