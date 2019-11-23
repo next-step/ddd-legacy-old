@@ -4,19 +4,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Expression {
-    private static final String DELIMITER = "\\,|\\:";
-    private static final String[] NULL_EXPRESSION = new String[]{};
-    private static final Pattern PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final int SPLIT_CUSTOM_DELIMITER = 1;
     private static final int SPLIT_CUSTOM_EXPRESSION = 2;
+    private static final Pattern PATTERN = Pattern.compile("//(.)\n(.*)");
+
     private String[] validExpressions;
-    private String expression;
-    private String customDelimiter;
 
     private Expression(final String expression) {
-        this.expression = expression;
-        this.validExpressions = split();
-        System.out.println(this.toString());
+        this.validExpressions = split(expression);
     }
 
     public static Expression of(final String expression) {
@@ -27,28 +22,21 @@ public class Expression {
         return this.validExpressions;
     }
 
-    private String[] split() {
-        if (isNullExpression()) {
-            return NULL_EXPRESSION;
+    private String[] split(String expression) {
+        if (isNullExpression(expression)) {
+            return StringUtil.NULL_EXPRESSION;
         }
-        if (isCustomDelimiter(this.expression)) {
-            return this.expression.split(this.customDelimiter);
-        }
-        return this.expression.split(DELIMITER);
-    }
 
-    private boolean isCustomDelimiter(String expression) {
         Matcher matcher = PATTERN.matcher(expression);
-        if (matcher.find()) {
-            this.expression = matcher.group(SPLIT_CUSTOM_EXPRESSION);
-            this.customDelimiter = matcher.group(SPLIT_CUSTOM_DELIMITER);
-            return true;
+        if (StringUtil.isCustomDelimiter(matcher)) {
+            return StringUtil.splitByCustomDelimiter(
+                    matcher.group(SPLIT_CUSTOM_EXPRESSION), matcher.group(SPLIT_CUSTOM_DELIMITER));
         }
-        return false;
+        return StringUtil.splitByDefaultDelimiter(expression);
     }
 
-    private boolean isNullExpression() {
-        return this.expression == null || this.expression.isEmpty();
+    private boolean isNullExpression(String expression) {
+        return expression == null || expression.isEmpty();
     }
 
 }

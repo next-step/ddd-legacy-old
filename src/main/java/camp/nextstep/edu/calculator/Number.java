@@ -4,9 +4,8 @@ public class Number {
     private int number;
 
     private Number(String numberString) {
-        int number = parseInt(numberString);
+        parseInt(numberString);
         validate(number);
-        this.number = number;
     }
 
     public static Number of(String text) {
@@ -23,11 +22,11 @@ public class Number {
         }
     }
 
-    private int parseInt(String number) {
+    private void parseInt(String number) {
         try {
-            return Integer.parseInt(number);
-        } catch (ArithmeticException e) {
-            throw new ArithmeticException();
+            this.number = Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
         }
     }
 
