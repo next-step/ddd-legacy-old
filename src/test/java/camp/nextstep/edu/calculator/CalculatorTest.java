@@ -1,5 +1,6 @@
 package camp.nextstep.edu.calculator;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,13 +15,17 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("계산기 객체에 대한 테스트")
 class CalculatorTest {
+    private Calculator calculator;
+
+    @BeforeEach
+    void setUp() {
+        calculator = new Calculator();
+    }
 
     @DisplayName("빈 문자열을 넘기면 결과값으로 0을 반환한다")
     @ParameterizedTest
     @ValueSource(strings = {"", " ", "  "})
     void 빈_문자열을_넘기면_결과값으로_0을_반환한다(String str) {
-        // given:
-        Calculator calculator = build();
         // when:
         int result = calculator.add(str);
         // then:
@@ -30,10 +35,7 @@ class CalculatorTest {
     @DisplayName("쉼표 구분자로 구성된 숫자 문자열을 넘기면 각 숫자의 합을 반환한다")
     @ParameterizedTest
     @MethodSource("expressionProviderWithComma")
-    void 쉼표_구분자로_구성된_숫자_문자열을_넘기면_각_숫자의_합을_반환한다(String str,
-                                               int expectedResult) {
-        // given:
-        Calculator calculator = build();
+    void 쉼표_구분자로_구성된_숫자_문자열을_넘기면_각_숫자의_합을_반환한다(String str, int expectedResult) {
         // when:
         int result = calculator.add(str);
         // then:
@@ -50,10 +52,7 @@ class CalculatorTest {
     @DisplayName("콜론 구분자로 구성된 숫자 문자열을 넘기면 각 숫자의 합을 반환한다")
     @ParameterizedTest
     @MethodSource("expressionProviderWithColon")
-    void 콜론_구분자로_구성된_숫자_문자열을_넘기면_각_숫자의_합을_반환한다(String str,
-                                               int expectedResult) {
-        // given:
-        Calculator calculator = build();
+    void 콜론_구분자로_구성된_숫자_문자열을_넘기면_각_숫자의_합을_반환한다(String str, int expectedResult) {
         // when:
         int result = calculator.add(str);
         // then:
@@ -67,13 +66,27 @@ class CalculatorTest {
         );
     }
 
+    @DisplayName("쉼표 콜론 구분자가 혼합된 숫자 문자열을 넘기면 각 숫자의 합을 반환한다")
+    @ParameterizedTest
+    @MethodSource("expressionProviderWithCommaAndColon")
+    void 쉼표_콜론_구분자가_혼합된_숫자_문자열을_넘기면_각_숫자의_합을_반환한다(String str, int expectedResult) {
+        // when:
+        int result = calculator.add(str);
+        // then:
+        assertThat(result).isEqualTo(expectedResult);
+    }
+
+    private static Stream<Arguments> expressionProviderWithCommaAndColon() {
+        return Stream.of(
+                Arguments.of("1,2:5", 8),
+                Arguments.of("3:5,2", 10)
+        );
+    }
+
     @DisplayName("커스텀 구분자로 구성된 숫자 문자열을 넘기면 각 숫자의 합을 반환한다")
     @ParameterizedTest
     @MethodSource("expressionProviderWithCustomDelimiter")
-    void 커스텀_구분자로_구성된_숫자_문자열을_넘기면_각_숫자의_합을_반환한다(String str,
-                                                int expectedResult) {
-        // given:
-        Calculator calculator = build();
+    void 커스텀_구분자로_구성된_숫자_문자열을_넘기면_각_숫자의_합을_반환한다(String str, int expectedResult) {
         // when
         int result = calculator.add(str);
         // then:
@@ -91,8 +104,6 @@ class CalculatorTest {
     @DisplayName("계산기에 숫자 이외의 값을 넘기면 NumberFormatException 예외를 반환한다")
     @Test
     void 계산기에_숫자_이외의_값을_넘기면_NumberFormatException_예외를_반환한다() {
-        // given:
-        Calculator calculator = build();
         // expect:
         assertThatThrownBy(() -> calculator.add("a,2,3"))
                 .isExactlyInstanceOf(NumberFormatException.class);
@@ -102,16 +113,10 @@ class CalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"-1,2,3", "1,-2,3", "1,2,-3"})
     void 계산기에_음수를_넘기면_IllegalArgumentException_예외를_반환한다(String str) {
-        // given:
-        Calculator calculator = build();
         // expect:
         assertThatThrownBy(() -> calculator.add(str))
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(Calculator.NOT_ALLOWED_NEGATIVE_NUMBER_EXCEPTION_MESSAGE);
-    }
-
-    private Calculator build() {
-        return new Calculator();
     }
 }
 
