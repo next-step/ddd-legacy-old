@@ -11,8 +11,9 @@ public class StringCalculator {
     private static final int DEFAULT_VALUE = 0;
 
     public int add(String input) {
-        if (isEmpty(input))
+        if (isEmpty(input)) {
             return DEFAULT_VALUE;
+        }
 
         String[] numbers = parse(input);
         return sum(numbers);
