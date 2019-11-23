@@ -50,4 +50,11 @@ class CalculatorNumberTest {
     void add(final String text, final CalculatorNumber expected) {
         assertThat(CalculatorNumber.of(text).add(CalculatorNumber.of("1"))).isEqualTo(expected);
     }
+
+    @DisplayName("CalculatorNumber int 값 반환")
+    @ParameterizedTest
+    @ValueSource(strings = {"1", "2", "3"})
+    void toInt(final String text) {
+        assertThat(CalculatorNumber.of(text).toInt()).isSameAs(Integer.parseInt(text));
+    }
 }
