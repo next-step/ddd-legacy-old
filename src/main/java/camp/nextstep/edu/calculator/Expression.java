@@ -24,12 +24,12 @@ public class Expression {
     }
 
     List<PositiveNumber> retrieveNumbers() {
-        final String expressionWithoutCustomSeparator = this.hasCustomSeparator() ?
-                this.getExpressionWithoutCustomSeparator() : this.expression;
+        final String expressionWithoutCustomSeparator = this.getExpressionWithoutCustomSeparator();
 
         final String[] numbers = expressionWithoutCustomSeparator.split(DEFAULT_SEPARATORS);
         return Arrays.stream(numbers)
-                .map(number -> new PositiveNumber(Integer.parseInt(number)))
+                .map(Integer::parseInt)
+                .map(PositiveNumber::new)
                 .collect(Collectors.toList());
     }
 
@@ -64,8 +64,12 @@ public class Expression {
     }
 
     private String getExpressionWithoutCustomSeparator() {
-        final String customSeparator = this.getCustomSeparator();
-        return this.removeCustomSeparator(customSeparator);
+        if (this.hasCustomSeparator()) {
+            final String customSeparator = this.getCustomSeparator();
+            return this.removeCustomSeparator(customSeparator);
+        }
+
+        return this.expression;
     }
 
     private String getCustomSeparator() {
