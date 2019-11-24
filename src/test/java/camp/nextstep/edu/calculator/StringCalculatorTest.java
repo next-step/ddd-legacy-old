@@ -13,21 +13,22 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class StringCalculatorTest {
-    @DisplayName(":를 구분자로 문자열을 파싱하여 문자열 숫자의 합을 반환한다")
+
+    @DisplayName("기본(:|,) 구분자로 문자열을 파싱하여 문자열 숫자의 합을 반환한다")
     @ParameterizedTest
-    @MethodSource("camp.nextstep.edu.calculator.StringCalculatorTestProvider#defaultStrategy")
+    @MethodSource("defaultStrategy")
     void calculate(String testString, int expected) {
         //when
         StringCalculator calculator = new StringCalculator();
         long result = calculator.calculateSum(testString);
         //then
-        assertThat(result ).isEqualTo(expected);
+        assertThat(result).isEqualTo(expected);
     }
 
     @DisplayName("null 또는 빈 문자열일 경우 0 반환")
     @ParameterizedTest
     @NullAndEmptySource
-    void calculate_given_null_or_empty_string(String testString){
+    void calculate_given_null_or_empty_string(String testString) {
         //when
         StringCalculator calculator = new StringCalculator();
         long result = calculator.calculateSum(testString);
@@ -37,30 +38,34 @@ class StringCalculatorTest {
 
     @DisplayName("커스텀 구분자로 문자열을 파싱하여 문자열 숫자의 합을 반환한다")
     @ParameterizedTest
-    @MethodSource("camp.nextstep.edu.calculator.StringCalculatorTestProvider#customStrategy")
-    void calculate_given_custom_splitter(String testString){
+    @MethodSource("customStrategy")
+    void calculate_given_custom_splitter(String testString, long expected) {
         //when
         StringCalculator calculator = new StringCalculator();
         long result = calculator.calculateSum(testString);
         //then
-        assertThat(result).isEqualTo(0);
+        assertThat(result).isEqualTo(expected);
     }
+
     @DisplayName("숫자 이외 문자열 또는 음수 문자열이 주어지면 실패한다")
     @ParameterizedTest
-    @ValueSource(strings =
-        {"a,2", "!,2","-100,2",
-        "//;\\na;2", "//~\\n!:2", "//~\\n-100,2"})
-    void calculate_given_invalid_number(String testString){
+    @ValueSource(strings = {
+        "a,2",
+        "!,2",
+        "-100,2",
+        "//;\\na;2",
+        "//~\\n!:2",
+        "//~\\n-100,2"}
+    )
+    void calculate_given_invalid_number(String testString) {
         //when
-        assertThatIllegalArgumentException().isThrownBy(()->{
+        assertThatIllegalArgumentException().isThrownBy(() -> {
             StringCalculator calculator = new StringCalculator();
             long result = calculator.calculateSum(testString);
         });
     }
 
-}
-class StringCalculatorTestProvider {
-    public static Stream<Arguments> defaultStrategy(){
+    private static Stream<Arguments> defaultStrategy() {
         return Stream.of(
             arguments("1,2", 3),
             arguments("1:2", 3),
@@ -68,11 +73,13 @@ class StringCalculatorTestProvider {
             arguments("1,2:3,", 6)
         );
     }
-    public static Stream<Arguments> customStrategy(){
+
+    private static Stream<Arguments> customStrategy() {
         return Stream.of(
-            arguments("//;\\n1;2;3", 6),
-            arguments("//~\\n2~3", 5),
-            arguments("//~\\n2~3~", 5)
+            arguments("//;\n1;2;3", 6L),
+            arguments("//|\n1|2|3", 6L),
+            arguments("//~\n2~3", 5L),
+            arguments("//~\n2~3~", 5L)
         );
     }
 
