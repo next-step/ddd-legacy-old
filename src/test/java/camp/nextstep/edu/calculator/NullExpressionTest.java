@@ -12,10 +12,10 @@ class NullExpressionTest {
     @Test
     void sumAll() {
         // when
-        final CalculateValue calculateValue = NullExpression.INSTANCE.sumAll();
-        final CalculateValue expected = CalculateValue.DEFAULT;
+        final Number positive = NullExpression.INSTANCE.sumAll();
+        final Number expected = Zero.INSTANCE;
 
         // then
-        assertThat(calculateValue).isEqualTo(expected);
+        assertThat(positive).isEqualTo(expected);
     }
 }

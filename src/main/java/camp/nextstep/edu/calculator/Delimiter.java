@@ -30,7 +30,7 @@ final class Delimiter {
 
     private static void validate(final String source) {
         if (Guard.isNullOrBlank(source)) {
-            throw new InvalidDelimiterException(source);
+            throw new InvalidArgumentException(source);
         }
     }
 }

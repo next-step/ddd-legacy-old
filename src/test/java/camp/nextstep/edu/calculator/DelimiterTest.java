@@ -31,7 +31,7 @@ class DelimiterTest {
     @ParameterizedTest
     @NullAndEmptySource
     void delimit_nullAndEmpty(final String source) {
-        assertThatExceptionOfType(InvalidDelimiterException.class)
+        assertThatExceptionOfType(InvalidArgumentException.class)
                 .isThrownBy(() -> Delimiter.delimit(source));
     }
 

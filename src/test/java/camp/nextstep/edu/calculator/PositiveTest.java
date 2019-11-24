@@ -9,17 +9,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 @DisplayName("정수 테스트")
-class CalculateValueTest {
+class PositiveTest {
 
     @DisplayName("string 으로 생성한다.")
     @ValueSource(strings = {"1", "3", "4", "5", "7", "100", "1123"})
     @ParameterizedTest
     void create_string(final String source) {
         // when
-        final CalculateValue calculateValue = CalculateValue.of(source);
+        final Positive positive = Positive.of(source);
 
         // then
-        assertThat(calculateValue).isNotNull();
+        assertThat(positive).isNotNull();
     }
 
     @DisplayName("integer 로 생성한다.")
@@ -27,21 +27,18 @@ class CalculateValueTest {
     @ParameterizedTest
     void create_integer(final int source) {
         // when
-        final CalculateValue calculateValue = CalculateValue.of(source);
+        final Positive positive = Positive.of(source);
 
         // then
-        assertThat(calculateValue).isNotNull();
+        assertThat(positive).isNotNull();
     }
 
-    @DisplayName("빈 문자열 또는 null을 입력할 경우 0을 반환해야 한다.")
+    @DisplayName("빈 문자열 또는 null을 입력할 경우 예외처리 한다.")
     @NullAndEmptySource
     @ParameterizedTest
     void create_nullAndEmpty(final String source) {
-        // when
-        final CalculateValue calculateValue = CalculateValue.of(source);
-
-        // then
-        assertThat(calculateValue).isEqualTo(CalculateValue.DEFAULT);
+        assertThatExceptionOfType(InvalidArgumentException.class)
+                .isThrownBy(() -> Positive.of(source));
     }
 
     @DisplayName("int 타입으로 변환한다.")
@@ -49,10 +46,10 @@ class CalculateValueTest {
     @ParameterizedTest
     void toInt(final int source) {
         // given
-        final CalculateValue calculateValue = CalculateValue.of(source);
+        final Positive positive = Positive.of(source);
 
         // when
-        final int result = calculateValue.toInt();
+        final int result = positive.intValue();
 
         // then
         assertThat(result).isEqualTo(source);
@@ -63,12 +60,12 @@ class CalculateValueTest {
     @ParameterizedTest
     void sum(final int source) {
         // given
-        final CalculateValue augend = CalculateValue.of(source);
-        final CalculateValue addend = CalculateValue.of(source);
+        final Positive augend = Positive.of(source);
+        final Positive addend = Positive.of(source);
 
         // when
-        final CalculateValue result = augend.sum(addend);
-        final CalculateValue expected = CalculateValue.of(source * 2);
+        final Number result = augend.sum(addend);
+        final Positive expected = Positive.of(source * 2);
 
         // then
         assertThat(result).isEqualTo(expected);
@@ -78,8 +75,8 @@ class CalculateValueTest {
     @ValueSource(ints = {-1, -100, -123})
     @ParameterizedTest
     void negative(final int source) {
-        assertThatExceptionOfType(NegativeValueException.class)
-                .isThrownBy(() -> CalculateValue.of(source));
+        assertThatExceptionOfType(InvalidPositiveException.class)
+                .isThrownBy(() -> Positive.of(source));
     }
 
     @DisplayName("원시 값이 같다면 동일한 객체이다.")
@@ -87,8 +84,8 @@ class CalculateValueTest {
     @ParameterizedTest
     void equals(final int source) {
         // given
-        final CalculateValue first = CalculateValue.of(source);
-        final CalculateValue second = CalculateValue.of(source);
+        final Positive first = Positive.of(source);
+        final Positive second = Positive.of(source);
 
         // when
         final boolean isEquals = first == second;

@@ -45,9 +45,10 @@ class StringExpressionTest {
     void create_contains(final String source) {
         // when
         final Expression expression = StringExpression.of(source);
+        final Expression containValue = StringExpression.of(source);
 
         // then
-        assertThat(expression.contains(source)).isTrue();
+        assertThat(expression.contains(containValue)).isTrue();
     }
 
     @DisplayName("comma 가 포함된 string 으로 생성한다.")
@@ -82,6 +83,7 @@ class StringExpressionTest {
 
         // then
         Arrays.stream(expected)
+                .map(StringExpression::of)
                 .map(expectedValue -> assertThat(expression.contains(expectedValue)))
                 .forEach(AbstractBooleanAssert::isTrue);
     }
@@ -113,13 +115,13 @@ class StringExpressionTest {
             delimiter = '|')
     @ParameterizedTest
     void sumAll(final String source,
-                final int rawExpected) {
+                final String rawExpected) {
         // given
         final Expression expression = StringExpression.of(source);
 
         // when
-        final CalculateValue result = expression.sumAll();
-        final CalculateValue expected = CalculateValue.of(rawExpected);
+        final Number result = expression.sumAll();
+        final Number expected = Value.of(rawExpected);
 
         // then
         assertThat(result).isEqualTo(expected);

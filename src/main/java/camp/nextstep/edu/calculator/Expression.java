@@ -1,8 +1,8 @@
 package camp.nextstep.edu.calculator;
 
-interface Expression<T> {
+interface Expression {
 
-    CalculateValue sumAll();
+    Number sumAll();
 
-    boolean contains(T rawValue);
+    boolean contains(Expression expression);
 }
