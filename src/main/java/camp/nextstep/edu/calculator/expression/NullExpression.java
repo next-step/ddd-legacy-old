@@ -1,4 +1,7 @@
-package camp.nextstep.edu.calculator;
+package camp.nextstep.edu.calculator.expression;
+
+import camp.nextstep.edu.calculator.value.Number;
+import camp.nextstep.edu.calculator.value.Zero;
 
 enum NullExpression implements Expression {
 

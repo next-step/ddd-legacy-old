@@ -1,5 +1,9 @@
 package camp.nextstep.edu.calculator;
 
+import camp.nextstep.edu.calculator.expression.Expression;
+import camp.nextstep.edu.calculator.expression.StringExpression;
+import camp.nextstep.edu.calculator.value.Number;
+
 final class StringCalculator implements Calculator<String> {
 
     @Override

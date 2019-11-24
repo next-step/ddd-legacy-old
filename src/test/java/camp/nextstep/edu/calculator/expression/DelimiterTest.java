@@ -1,5 +1,6 @@
-package camp.nextstep.edu.calculator;
+package camp.nextstep.edu.calculator.expression;
 
+import camp.nextstep.edu.calculator.InvalidArgumentException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

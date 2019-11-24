@@ -1,6 +1,6 @@
-package camp.nextstep.edu.calculator;
+package camp.nextstep.edu.calculator.value;
 
-enum Zero implements Number {
+public enum Zero implements Number {
 
     INSTANCE;
 

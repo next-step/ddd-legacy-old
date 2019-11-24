@@ -1,4 +1,9 @@
-package camp.nextstep.edu.calculator;
+package camp.nextstep.edu.calculator.expression;
+
+import camp.nextstep.edu.calculator.Guard;
+import camp.nextstep.edu.calculator.value.Number;
+import camp.nextstep.edu.calculator.value.Value;
+import camp.nextstep.edu.calculator.value.Zero;
 
 import java.util.Arrays;
 import java.util.List;
@@ -7,7 +12,7 @@ import java.util.Objects;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
-final class StringExpression implements Expression {
+public final class StringExpression implements Expression {
 
     private final List<Number> numbers;
 
@@ -15,7 +20,7 @@ final class StringExpression implements Expression {
         this.numbers = numbers;
     }
 
-    static Expression of(final String expression) {
+    public static Expression of(final String expression) {
         if (Guard.isNullOrBlank(expression)) {
             return NullExpression.INSTANCE;
         }

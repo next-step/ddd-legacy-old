@@ -1,4 +1,7 @@
-package camp.nextstep.edu.calculator;
+package camp.nextstep.edu.calculator.expression;
+
+import camp.nextstep.edu.calculator.Guard;
+import camp.nextstep.edu.calculator.InvalidArgumentException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
