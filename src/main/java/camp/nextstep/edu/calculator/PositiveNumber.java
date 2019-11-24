@@ -11,25 +11,20 @@ public class PositiveNumber {
 
     private long value;
 
-    public static List<PositiveNumber> parseStrings(List<String> inputList) {
-        if (CollectionUtils.isEmpty(inputList)) {
+    public static List<PositiveNumber> of(List<String> inputs) {
+        if (CollectionUtils.isEmpty(inputs)) {
             return Collections.emptyList();
         }
-        return inputList.stream().map(PositiveNumber::parse).collect(toList());
+        return inputs.stream().map(PositiveNumber::of).collect(toList());
     }
 
-    public static PositiveNumber parse(String input) {
+    public static PositiveNumber of(String input) {
         try {
-            return new PositiveNumber(Integer.parseInt(input));
-        }catch (NumberFormatException e){
-            throw new IllegalArgumentException("input must be number");
+            return new PositiveNumber(Long.parseLong(input));
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("input must be number", e);
         }
     }
-
-    public static PositiveNumber parse(Integer input) {
-        return new PositiveNumber(input.longValue());
-    }
-
 
     private PositiveNumber(long value) {
         if (value < 0) {
@@ -42,15 +37,12 @@ public class PositiveNumber {
         Assert.notNull(next, "next must be not null");
         return new PositiveNumber(this.value + next.value);
     }
-    public boolean isSame(PositiveNumber other){
+
+    public boolean isSame(PositiveNumber other) {
         return other != null && this.value == other.value;
     }
 
-    public boolean isSameAs(Integer other){
-        return other!=null && this.value == other;
-    }
-
-    public long value(){
+    public long value() {
         return this.value;
     }
 }
