@@ -1,12 +1,14 @@
 package camp.nextstep.edu.calculator;
 
-public class StringHelper {
+public class NumberHelper {
 
-    private StringHelper() {
+    private static int ZERO = 0;
+
+    private NumberHelper() {
 
     }
 
-    public static boolean isNullOrEmpty(String text) {
-        return text == null || text.isEmpty();
+    public static boolean isNegative(int number) {
+        return number < ZERO;
     }
 }
