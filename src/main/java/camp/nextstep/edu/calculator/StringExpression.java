@@ -6,12 +6,12 @@ import java.util.List;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
-public class StringExpression implements Expression {
+public class StringExpression implements Expression<String> {
 
-    private final List<Positive> positives;
+    private final List<CalculateValue> calculateValues;
 
-    private StringExpression(final List<Positive> positives) {
-        this.positives = positives;
+    private StringExpression(final List<CalculateValue> calculateValues) {
+        this.calculateValues = calculateValues;
     }
 
     static Expression of(final String expression) {
@@ -20,14 +20,20 @@ public class StringExpression implements Expression {
         }
 
         return Arrays.stream(Delimiter.delimit(expression))
-                .map(Positive::of)
+                .map(CalculateValue::of)
                 .collect(collectingAndThen(toList(), StringExpression::new));
     }
 
     @Override
-    public Positive sumAll() {
-        return positives.stream()
-                .reduce(Positive::sum)
-                .orElse(Positive.DEFAULT);
+    public CalculateValue sumAll() {
+        return calculateValues.stream()
+                .reduce(CalculateValue.DEFAULT, CalculateValue::sum);
+    }
+
+    @Override
+    public boolean contains(final String rawValue) {
+        final CalculateValue value = CalculateValue.of(rawValue);
+
+        return calculateValues.contains(value);
     }
 }

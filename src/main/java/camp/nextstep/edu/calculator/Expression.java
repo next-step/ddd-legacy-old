@@ -1,6 +1,7 @@
 package camp.nextstep.edu.calculator;
 
-public interface Expression {
+public interface Expression<T> {
 
-    Positive sumAll();
+    CalculateValue sumAll();
+    boolean contains(T rawValue);
 }

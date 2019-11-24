@@ -7,7 +7,7 @@ class Calculator {
 
     static int calculate(final String rawExpression) {
         final Expression expression = StringExpression.of(rawExpression);
-        final Positive result = expression.sumAll();
+        final CalculateValue result = expression.sumAll();
 
         return result.toInt();
     }
