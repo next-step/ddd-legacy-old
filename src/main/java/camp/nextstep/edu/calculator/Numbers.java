@@ -9,7 +9,7 @@ class Numbers {
         this.numbers = numbers;
     }
 
-    int toSumInt() {
+    public int toSumInt() {
         return numbers.stream()
                 .mapToInt(Number::getNumber).sum();
     }

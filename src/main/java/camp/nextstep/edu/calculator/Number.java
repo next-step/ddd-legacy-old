@@ -26,7 +26,7 @@ class Number {
         try {
             this.number = Integer.parseInt(number);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자를 입력하세요.");
+            throw new IllegalArgumentException(Const.NOT_A_NUMBER_MESSAGE);
         }
     }
 
