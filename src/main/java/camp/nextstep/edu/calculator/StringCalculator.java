@@ -41,7 +41,7 @@ public class StringCalculator {
     }
 
     private List<Number> convert(String[] numbers) {
-        return  Arrays.stream(numbers)
+        return Arrays.stream(numbers)
                 .map(Number::of)
                 .collect(toList());
     }
