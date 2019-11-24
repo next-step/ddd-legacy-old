@@ -1,9 +1,12 @@
 package camp.nextstep.edu.calculator;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static java.util.stream.Collectors.toList;
 
 public class StringCalculator {
     private static final String DEFAULT_DELIMITER = "[,:]";
@@ -18,7 +21,8 @@ public class StringCalculator {
         }
 
         String[] numbers = parse(input);
-        return sum(numbers);
+        List<Number> convertedNumbers = convert(numbers);
+        return sum(convertedNumbers);
     }
 
     private boolean isEmpty(String input) {
@@ -36,9 +40,14 @@ public class StringCalculator {
         return input.split(DEFAULT_DELIMITER);
     }
 
-    private int sum(String[] numbers) {
-        return Arrays.stream(numbers)
+    private List<Number> convert(String[] numbers) {
+        return  Arrays.stream(numbers)
                 .map(Number::of)
+                .collect(toList());
+    }
+
+    private int sum(List<Number> numbers) {
+        return numbers.stream()
                 .reduce(Number.zero(), Number::add)
                 .toInt();
     }
