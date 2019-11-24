@@ -37,10 +37,10 @@ class Expressions {
         }
         final Matcher matcher = PATTERN.matcher(expression);
         if (isCustomDelimiter(matcher)) {
-            return splitByCustomDelimiter(
+            return splitByDelimiter(
                     matcher.group(SPLIT_CUSTOM_EXPRESSION), matcher.group(SPLIT_CUSTOM_DELIMITER));
         }
-        return splitByDefaultDelimiter(expression);
+        return splitByDelimiter(expression);
     }
 
     private static boolean isNullExpression(final String expression) {
@@ -51,11 +51,11 @@ class Expressions {
         return matcher.find();
     }
 
-    private static String[] splitByCustomDelimiter(final String expression, final String customDelimiter) {
+    private static String[] splitByDelimiter(final String expression, final String customDelimiter) {
         return expression.split(customDelimiter);
     }
 
-    private static String[] splitByDefaultDelimiter(final String expression) {
+    private static String[] splitByDelimiter(final String expression) {
         return expression.split(DEFAULT_DELIMITER);
     }
 
