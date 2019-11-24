@@ -2,8 +2,6 @@ package camp.nextstep.edu.calculator;
 
 public class Number {
 
-    private static final String ZERO = "0";
-
     private int number;
 
     private Number(int number) {
