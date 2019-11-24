@@ -17,10 +17,6 @@ public class Number {
         return new Number(number);
     }
 
-    public static Number zero() {
-        return Number.of(ZERO);
-    }
-
     private static void validatePositiveNumber(int number) {
         if (number < 0) {
             throw new RuntimeException("문자열 계산기에 음수 사용은 불가합니다.");

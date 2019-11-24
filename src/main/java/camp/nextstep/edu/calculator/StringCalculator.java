@@ -48,7 +48,7 @@ public class StringCalculator {
 
     private int sum(List<Number> numbers) {
         return numbers.stream()
-                .reduce(Number.zero(), Number::add)
-                .toInt();
+                .mapToInt(Number::toInt)
+                .sum();
     }
 }
