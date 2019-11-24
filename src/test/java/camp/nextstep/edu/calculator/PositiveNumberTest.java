@@ -76,14 +76,16 @@ class PositiveNumberTest {
     @DisplayName("add시 값이 더해진 value를 갖는 새로운 PositiveNumber를 반환한다")
     @ParameterizedTest
     @MethodSource("addValueProvider")
-    void add_returns_new_PositiveNumber_with_added_value(String target, String added,long expected){
+    void add_returns_new_PositiveNumber_with_added_value(String target, String added,
+        long expected) {
         PositiveNumber result =
             PositiveNumber.of(target)
-            .add(PositiveNumber.of(added));
+                .add(PositiveNumber.of(added));
 
         assertThat(result.value()).isEqualTo(expected);
 
     }
+
     @DisplayName("null을 add 할 수 없다")
     @Test
     void given_null_add_throws_exception() {
@@ -92,11 +94,12 @@ class PositiveNumberTest {
         );
     }
 
-    static Stream<Arguments> addValueProvider(){
+    static Stream<Arguments> addValueProvider() {
         return Stream.of(
             arguments("1", "2", 3),
-            arguments("100","320",420),
-            arguments(String.valueOf(Integer.MAX_VALUE), String.valueOf(Integer.MAX_VALUE),(long)(Integer.MAX_VALUE) *2)
+            arguments("100", "320", 420),
+            arguments(String.valueOf(Integer.MAX_VALUE), String.valueOf(Integer.MAX_VALUE),
+                (long) (Integer.MAX_VALUE) * 2)
         );
     }
 }
