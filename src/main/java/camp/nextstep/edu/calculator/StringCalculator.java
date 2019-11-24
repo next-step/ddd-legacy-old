@@ -38,16 +38,8 @@ public class StringCalculator {
 
     private int sum(String[] numbers) {
         return Arrays.stream(numbers)
-                .mapToInt(this::parsePositiveNumber)
-                .sum();
-    }
-
-    private int parsePositiveNumber(String input) {
-        int number = Integer.parseInt(input);
-        if (number < 0) {
-            throw new RuntimeException("문자열 계산기에 음수 사용은 불가합니다.");
-        }
-
-        return number;
+                .map(Number::of)
+                .reduce(Number.zero(), Number::add)
+                .toInt();
     }
 }
