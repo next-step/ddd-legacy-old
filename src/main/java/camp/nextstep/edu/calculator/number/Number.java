@@ -6,7 +6,8 @@ import java.util.Objects;
 
 public class Number {
 
-    public static final Number ZERO = new Number(0);
+    public static final Number ZERO = new Number(Number.ZERO_VALUE);
+    private static final int ZERO_VALUE = 0;
 
     private final int value;
 
@@ -16,9 +17,13 @@ public class Number {
     }
 
     private void validateValue(int value) {
-        if (value < 0) {
+        if (isNegative(value)) {
             throw new IllegalArgumentException("value 는 음수 일 수 없습니다. value = [" + value + "]");
         }
+    }
+
+    private boolean isNegative(int value) {
+        return value < ZERO_VALUE;
     }
 
     public static Number parse(String value) {

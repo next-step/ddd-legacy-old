@@ -1,5 +1,6 @@
 package camp.nextstep.edu.calculator.number;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -16,7 +17,7 @@ public class Numbers {
     }
 
     public Numbers(List<Number> values) {
-        this.values = values;
+        this.values = new ArrayList<>(values);
     }
 
     public static Numbers parse(String[] stringNumbers) {
@@ -27,15 +28,19 @@ public class Numbers {
     }
 
     private static boolean isEmptyArray(String[] stringNumbers) {
-        return stringNumbers == null || stringNumbers.length == 0;
+        return Objects.isNull(stringNumbers) || stringNumbers.length == 0;
     }
 
     private static List<Number> convertNumbers(String[] stringNumbers) {
-        return Arrays.stream(stringNumbers).map(Number::parse).collect(Collectors.toList());
+        return Arrays.stream(stringNumbers)
+                .map(Number::parse)
+                .collect(Collectors.toList());
     }
 
     public int sumValue() {
-        return this.values.stream().reduce(Number.ZERO, Number::plus).getValue();
+        return this.values.stream()
+                .reduce(Number.ZERO, Number::plus)
+                .getValue();
     }
 
     @Override
