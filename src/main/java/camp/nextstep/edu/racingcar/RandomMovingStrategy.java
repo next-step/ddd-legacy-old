@@ -1,9 +1,17 @@
 package camp.nextstep.edu.racingcar;
 
-import java.util.Random;
+public class RandomMovingStrategy implements MovingStrategy {
+    private ValueGenerator valueGenerator;
 
-public class RandomMovingStrategy {
-    boolean movable() {
-        return new Random().nextInt(9) >= 4;
+    public RandomMovingStrategy() {
+        this.valueGenerator = new RandomValueGenerator();
+    }
+
+    RandomMovingStrategy(ValueGenerator valueGenerator) {
+        this.valueGenerator = valueGenerator;
+    }
+
+    public boolean movable() {
+        return valueGenerator.generate() >= 4;
     }
 }
