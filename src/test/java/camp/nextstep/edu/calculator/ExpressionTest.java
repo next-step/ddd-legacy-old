@@ -92,4 +92,20 @@ class ExpressionTest {
             expression.retrieveNumbers();
         });
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//add\n1add2", "//plus\n1plus2", "//;\n1;2"})
+    @DisplayName("custom 구분자를 사용하여 문자열에서 수를 가져온다")
+    void retrieveNumbersUsingCustomSeparators(final String expressionString) {
+        // given
+        final Expression expression = new Expression(expressionString);
+
+        // when
+        final List<PositiveNumber> numbers = expression.retrieveNumbers();
+
+        // then
+        assertThat(numbers).hasSize(2);
+        assertThat(numbers.get(0).isSameValue(1)).isTrue();
+        assertThat(numbers.get(1).isSameValue(2)).isTrue();
+    }
 }

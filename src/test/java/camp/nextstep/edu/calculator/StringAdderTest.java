@@ -72,4 +72,15 @@ class StringAdderTest {
             StringAdder.calculate(new Expression(expression));
         });
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//add\n1add2", "//plus\n1plus2", "//;\n1;2"})
+    @DisplayName("custom 구분자를 사용하여 수의 합을 구한다")
+    void calculateUsingCustomSeparators(final String expression) {
+        // when
+        final int result = StringAdder.calculate(new Expression(expression));
+
+        // then
+        assertThat(result).isEqualTo(3);
+    }
 }
