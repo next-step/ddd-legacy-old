@@ -1,5 +1,6 @@
 package camp.nextstep.edu.calculator;
 
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,7 +16,9 @@ public class Calculator {
             return 0;
         }
 
-        String[] numbers = split(input);
+        Number[] numbers = Arrays.stream(split(input))
+                .map(Number::of)
+                .toArray(Number[]::new);
 
         return getSum(numbers);
     }
@@ -33,22 +36,10 @@ public class Calculator {
         return input.split(delimiter);
     }
 
-    private int getSum(String[] numbers) {
-        int sum = 0;
-        for (String number : numbers) {
-            sum += getPositiveNumber(number);
-        }
-        return sum;
-    }
-
-    private int getPositiveNumber(String number) {
-        int parsedNumber = Integer.parseInt(number);
-
-        if (parsedNumber < 0) {
-            throw new RuntimeException();
-        }
-
-        return parsedNumber;
+    private int getSum(Number[] numbers) {
+        return Arrays.stream(numbers)
+                .mapToInt(Number::getNumber)
+                .sum();
     }
 
     private boolean isEmptyString(String str) {
