@@ -63,8 +63,8 @@ class ExpressionTest {
 
         // then
         assertThat(numbers).hasSize(2);
-        assertThat(numbers.get(0).isSameValue(1)).isTrue();
-        assertThat(numbers.get(1).isSameValue(2)).isTrue();
+        assertThat(numbers.get(0)).isEqualTo(new PositiveNumber(1));
+        assertThat(numbers.get(1)).isEqualTo(new PositiveNumber(2));
     }
 
     @Test
@@ -105,8 +105,8 @@ class ExpressionTest {
 
         // then
         assertThat(numbers).hasSize(2);
-        assertThat(numbers.get(0).isSameValue(1)).isTrue();
-        assertThat(numbers.get(1).isSameValue(2)).isTrue();
+        assertThat(numbers.get(0)).isEqualTo(new PositiveNumber(1));
+        assertThat(numbers.get(1)).isEqualTo(new PositiveNumber(2));
     }
 
     @ParameterizedTest

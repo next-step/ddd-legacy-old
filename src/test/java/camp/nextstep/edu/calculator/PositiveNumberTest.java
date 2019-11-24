@@ -60,6 +60,6 @@ class PositiveNumberTest {
         final PositiveNumber addResult = positiveNumber1.add(positiveNumber2);
 
         // then
-        assertThat(addResult.isSameValue(number1 + number2)).isTrue();
+        assertThat(addResult).isEqualTo(new PositiveNumber(number1 + number2));
     }
 }
