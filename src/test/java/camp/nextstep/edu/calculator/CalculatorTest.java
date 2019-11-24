@@ -1,15 +1,15 @@
 package camp.nextstep.edu.calculator;
 
+import camp.nextstep.edu.calculator.exception.NegativeNumberException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.*;
 
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class CalculatorTest {
 
@@ -40,6 +40,21 @@ class CalculatorTest {
                 Arguments.of("//&\n4&3&2", 9),
                 Arguments.of("//#\n2#4#8", 14)
         );
+    }
+
+    @DisplayName("문자열 계산기 음수일 때 NegativeNumberException 발생")
+    @ParameterizedTest
+    @ValueSource(strings = {"-1,2:3", "1:5,-9", "//;\n-1;2;3"})
+    void 기본_문자열_음수(String text) {
+        assertThatThrownBy(() -> calculator.add(text))
+                .isInstanceOf(NegativeNumberException.class);
+    }
+
+    @DisplayName("빈 문자열 또는 null일 경우 0을 반환한다")
+    @ParameterizedTest
+    @NullAndEmptySource
+    void 빈_문자열_또는_null일경우_0을_반환한다(String text) {
+        assertThat(calculator.add(text)).isEqualTo(Calculator.DEFAULT_ZERO_VALUE);
     }
 
 }
