@@ -74,8 +74,10 @@ public class Expression {
     }
 
     private String removeCustomSeparator(final String customSeparator) {
-        final String customSeparatorRemovedExpression = this.expression.replaceAll(customSeparator, DEFAULT_SEPARATOR);
-        final int endIndexOfCustomSeparator = customSeparatorRemovedExpression.indexOf(CUSTOM_SEPARATOR_END);
-        return customSeparatorRemovedExpression.substring(endIndexOfCustomSeparator + CUSTOM_SEPARATOR_END.length());
+        return this.expression
+                .replaceFirst(customSeparator, "")
+                .replaceFirst(CUSTOM_SEPARATOR_START, "")
+                .replaceFirst(CUSTOM_SEPARATOR_END, "")
+                .replaceAll(customSeparator, DEFAULT_SEPARATOR);
     }
 }
