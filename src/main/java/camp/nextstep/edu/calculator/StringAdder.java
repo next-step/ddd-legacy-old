@@ -1,5 +1,7 @@
 package camp.nextstep.edu.calculator;
 
+import java.util.List;
+
 public class StringAdder {
 
     private StringAdder() {
@@ -11,6 +13,13 @@ public class StringAdder {
             return 0;
         }
 
-        return 0;
+        final List<PositiveNumber> numbers = expression.retrieveNumbers();
+        return getSumOf(numbers).getValue();
+    }
+
+    private static PositiveNumber getSumOf(final List<PositiveNumber> numbers) {
+        return numbers.stream()
+                .reduce(PositiveNumber::add)
+                .orElseGet(() -> new PositiveNumber(0));
     }
 }
