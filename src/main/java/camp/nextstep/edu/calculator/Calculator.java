@@ -1,14 +1,7 @@
 package camp.nextstep.edu.calculator;
 
-class Calculator {
+@FunctionalInterface
+interface Calculator<T> {
 
-    private Calculator() {
-    }
-
-    static int calculate(final String rawExpression) {
-        final Expression expression = StringExpression.of(rawExpression);
-        final CalculateValue result = expression.sumAll();
-
-        return result.toInt();
-    }
+    int calculate(T rawValue);
 }

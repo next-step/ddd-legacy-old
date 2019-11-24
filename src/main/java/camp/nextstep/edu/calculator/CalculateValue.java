@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.WeakHashMap;
 
-class CalculateValue {
+final class CalculateValue {
 
     static final int MIN = 0;
 

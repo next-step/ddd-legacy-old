@@ -13,6 +13,4 @@ enum NullExpression implements Expression<Object> {
     public boolean contains(Object ignored) {
         return false;
     }
-
-
 }

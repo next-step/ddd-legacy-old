@@ -2,7 +2,7 @@ package camp.nextstep.edu.calculator;
 
 import java.util.Objects;
 
-class Guard {
+final class Guard {
 
     private Guard() {
     }

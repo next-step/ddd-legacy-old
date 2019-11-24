@@ -3,7 +3,7 @@ package camp.nextstep.edu.calculator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class Delimiter {
+final class Delimiter {
 
     private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
 

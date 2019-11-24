@@ -1,5 +1,6 @@
 package camp.nextstep.edu.calculator;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -13,14 +14,21 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("계산기 테스트")
-class CalculatorTest {
+class StringCalculatorTest {
+
+    private Calculator<String> calculator;
+
+    @BeforeEach
+    void setUp() {
+        calculator = new StringCalculator();
+    }
 
     @DisplayName("1. 빈 문자열 또는 null 을 입력할 경우 0을 반환해야 한다. (예 : “” => 0, null => 0)")
     @NullAndEmptySource
     @ParameterizedTest
     void calculate_nullAndEmpty(final String source) {
         // when
-        final int result = Calculator.calculate(source);
+        final int result = calculator.calculate(source);
 
         // then
         assertThat(result).isZero();
@@ -31,7 +39,7 @@ class CalculatorTest {
     @DisplayName("2. 숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.(예 : “1”)")
     void calculate_singleNumber(final String source) {
         // when
-        final int result = Calculator.calculate(source);
+        final int result = calculator.calculate(source);
 
         // then
         assertThat(result).isEqualTo(Integer.parseInt(source));
@@ -43,7 +51,7 @@ class CalculatorTest {
     void calculate_comma(final String source,
                          final int expected) {
         // when
-        final int result = Calculator.calculate(source);
+        final int result = calculator.calculate(source);
 
         // then
         assertThat(result).isEqualTo(expected);
@@ -55,7 +63,7 @@ class CalculatorTest {
     void calculate_commaWithColon(final String source,
                                   final int expected) {
         // when
-        final int result = Calculator.calculate(source);
+        final int result = calculator.calculate(source);
 
         // then
         assertThat(result).isEqualTo(expected);
@@ -67,7 +75,7 @@ class CalculatorTest {
     void calculate_custom(final String source,
                           final int expected) {
         // when
-        final int result = Calculator.calculate(source);
+        final int result = calculator.calculate(source);
 
         // then
         assertThat(result).isEqualTo(expected);

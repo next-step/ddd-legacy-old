@@ -6,7 +6,7 @@ import java.util.List;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
-public class StringExpression implements Expression<String> {
+final class StringExpression implements Expression<String> {
 
     private final List<CalculateValue> calculateValues;
 
