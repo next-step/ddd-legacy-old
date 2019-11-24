@@ -8,6 +8,8 @@ public class Calculator {
 
     private static final Pattern customDelimiter = Pattern.compile("//(.)\\n(.*)");
 
+    private static final String DEFAULT_DELIMITER_REGEX = "\\,|\\:";
+
     public int add(String input) {
         if (isEmptyString(input)) {
             return 0;
@@ -19,7 +21,7 @@ public class Calculator {
     }
 
     private String[] split(String input) {
-        String delimiter = "\\,|\\:";
+        String delimiter = DEFAULT_DELIMITER_REGEX;
 
         Matcher matcher = customDelimiter.matcher(input);
 
