@@ -2,40 +2,41 @@ package camp.nextstep.edu.calculator.splitter;
 
 import camp.nextstep.edu.util.StringUtils;
 
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CustomDelimiterSplitter implements Splitter {
 
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final int DELIMITER_GROUP = 1;
+    private static final int VALUES_GROUP = 2;
 
     @Override
-    public boolean supports(String stringValue) {
-        if (StringUtils.isBlank(stringValue)) {
-            return false;
-        }
-        return CUSTOM_DELIMITER_PATTERN.matcher(stringValue).matches();
+    public boolean supports(String value) {
+        return getMatchedMatcher(value).isPresent();
     }
 
     @Override
-    public String[] split(String stringValue) {
-        final Matcher matcher = createSplitMatcher(stringValue);
+    public String[] split(String value) {
+        final Matcher matcher = getMatchedMatcher(value)
+                .orElseThrow(() ->new IllegalArgumentException("지원하지 않는 형식의 값입니다. value : [" + value + "]"));
 
-        final String delimiter = matcher.group(1);
-        final String values = matcher.group(2);
+        final String delimiter = matcher.group(DELIMITER_GROUP);
+        final String values = matcher.group(VALUES_GROUP);
         return values.split(Pattern.quote(delimiter));
     }
 
-    private Matcher createSplitMatcher(String stringValue) {
-        final String errorMessage = "지원하지 않는 형식의 값입니다. stringValue : [" + stringValue + "]";
-        if (StringUtils.isBlank(stringValue)) {
-            throw new IllegalArgumentException(errorMessage);
+    private Optional<Matcher> getMatchedMatcher(String value) {
+        if (StringUtils.isBlank(value)) {
+            return Optional.empty();
         }
 
-        final Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(stringValue);
+        final Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(value);
         if (!matcher.matches()) {
-            throw new IllegalArgumentException(errorMessage);
+            return Optional.empty();
         }
-        return matcher;
+
+        return Optional.of(matcher);
     }
 }

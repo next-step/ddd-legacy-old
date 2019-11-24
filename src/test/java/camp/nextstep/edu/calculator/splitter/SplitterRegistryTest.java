@@ -40,12 +40,12 @@ class SplitterRegistryTest {
         }
 
         @Override
-        public boolean supports(String stringValue) {
+        public boolean supports(String value) {
             return this.supports;
         }
 
         @Override
-        public String[] split(String stringValue) {
+        public String[] split(String value) {
             return new String[0];
         }
     }

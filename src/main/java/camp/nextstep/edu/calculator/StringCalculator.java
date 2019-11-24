@@ -12,10 +12,10 @@ public class StringCalculator {
         this.splitterRegistry = splitterRegistry;
     }
 
-    public int sum(String stringValue) {
-        Splitter splitter = splitterRegistry.getSplitter(stringValue);
+    public int sum(String value) {
+        Splitter splitter = splitterRegistry.getSplitter(value);
 
-        Numbers numbers = Numbers.parse(splitter.split(stringValue));
+        Numbers numbers = Numbers.parse(splitter.split(value));
 
         return numbers.sumValue();
     }

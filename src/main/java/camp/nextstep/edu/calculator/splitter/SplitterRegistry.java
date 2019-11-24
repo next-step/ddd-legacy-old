@@ -13,9 +13,9 @@ public class SplitterRegistry {
         this.splitters = Arrays.asList(splitters);
     }
 
-    public Splitter getSplitter(String stringValue) {
+    public Splitter getSplitter(String value) {
         return splitters.stream()
-                .filter(splitter -> splitter.supports(stringValue))
+                .filter(splitter -> splitter.supports(value))
                 .findFirst()
                 .orElse(DEFAULT_SPLITTER);
     }

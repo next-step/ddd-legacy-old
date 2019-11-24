@@ -10,15 +10,15 @@ class DefaultSplitter implements Splitter {
     private static final Pattern DELIMITER = Pattern.compile("[,:]");
 
     @Override
-    public boolean supports(String stringValue) {
+    public boolean supports(String value) {
         return true;
     }
 
     @Override
-    public String[] split(String stringValue) {
-        if (StringUtils.isBlank(stringValue)) {
+    public String[] split(String value) {
+        if (StringUtils.isBlank(value)) {
             return EMPTY_ARRAY;
         }
-        return DELIMITER.split(stringValue);
+        return DELIMITER.split(value);
     }
 }

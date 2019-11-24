@@ -2,8 +2,8 @@ package camp.nextstep.edu.calculator.splitter;
 
 public interface Splitter {
 
-    boolean supports(String stringValue);
+    boolean supports(String value);
 
-    String[] split(String stringValue);
+    String[] split(String value);
 
 }
