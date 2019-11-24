@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -17,17 +19,12 @@ class CalculatorTest {
         calculator = new Calculator();
     }
 
-    @DisplayName("빈 문자열이 입력될 경우 0을 반환한다")
-    @Test
-    void inputIsEmpty() {
-        Assertions.assertThat(calculator.add(""))
-                .isEqualTo(0);
-    }
-
-    @DisplayName("null이 입력될 경우 0을 반환한다")
-    @Test
-    void inputIsNull() {
-        Assertions.assertThat(calculator.add(null))
+    @DisplayName("빈 문자열 또는 null이 입력될 경우 0을 반환한다")
+    @ParameterizedTest
+    @NullSource
+    @EmptySource
+    void inputIsEmptyOrNull(String input) {
+        Assertions.assertThat(calculator.add(input))
                 .isEqualTo(0);
     }
 
