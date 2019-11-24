@@ -1,18 +1,18 @@
 package camp.nextstep.edu.calculator;
 
-public class Number {
-    private int number;
+class Number {
+    private Integer number;
 
     private Number(final String numberString) {
         parseInt(numberString);
         validate(number);
     }
 
-    public static Number of(final String text) {
+    static Number of(final String text) {
         return new Number(text);
     }
 
-    public int value() {
+    public Integer getNumber() {
         return number;
     }
 

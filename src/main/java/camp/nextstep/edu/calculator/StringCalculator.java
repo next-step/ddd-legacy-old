@@ -1,13 +1,10 @@
 package camp.nextstep.edu.calculator;
 
-public class StringCalculator {
-    private static Numbers numbers = new Numbers();
-
-    public StringCalculator() {
-        this.numbers = new Numbers();
-    }
+class StringCalculator {
 
     public static int add(final String text) {
-        return numbers.add(text).toSumInt();
+        Expressions expressions = Expressions.of(text);
+        Numbers numbers = expressions.toNumbers();
+        return numbers.toSumInt();
     }
 }
