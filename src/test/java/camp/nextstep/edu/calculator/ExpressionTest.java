@@ -108,4 +108,15 @@ class ExpressionTest {
         assertThat(numbers.get(0).isSameValue(1)).isTrue();
         assertThat(numbers.get(1).isSameValue(2)).isTrue();
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//;1;2", ";\n1;2"})
+    @DisplayName("custom 구분자 선언 오류")
+    void wrongCustomSeparatorDeclaration(final String expression) {
+        // when
+        // then
+        assertThrows(RuntimeException.class, () -> {
+            new Expression(expression);
+        });
+    }
 }

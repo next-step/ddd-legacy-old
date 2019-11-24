@@ -14,6 +14,8 @@ public class Expression {
     private final String expression;
 
     public Expression(String expression) {
+        this.validateExpression(expression);
+
         this.expression = expression;
     }
 
@@ -22,9 +24,8 @@ public class Expression {
     }
 
     List<PositiveNumber> retrieveNumbers() {
-        final String expressionWithoutCustomSeparator = (this.hasCustomSeparator()) ?
-                this.getExpressionWithoutCustomSeparator() :
-                this.expression;
+        final String expressionWithoutCustomSeparator = this.hasCustomSeparator() ?
+                this.getExpressionWithoutCustomSeparator() : this.expression;
 
         final String[] numbers = expressionWithoutCustomSeparator.split(DEFAULT_SEPARATORS);
         return Arrays.stream(numbers)
@@ -32,8 +33,26 @@ public class Expression {
                 .collect(Collectors.toList());
     }
 
+    private void validateExpression(String expression) {
+        if (this.isEmptyString(expression)) {
+            return;
+        }
+
+        validateCustomSeparator(expression);
+    }
+
     private boolean isEmptyString(final String expression) {
         return (expression == null) || ("".equals(expression));
+    }
+
+    private void validateCustomSeparator(String expression) {
+        if (expression.startsWith(CUSTOM_SEPARATOR_START) && !(expression.contains(CUSTOM_SEPARATOR_END))) {
+            throw new IllegalArgumentException("Custom separator declaration format is wrong");
+        }
+
+        if (!(expression.startsWith(CUSTOM_SEPARATOR_START)) && expression.contains(CUSTOM_SEPARATOR_END)) {
+            throw new IllegalArgumentException("Custom separator declaration format is wrong");
+        }
     }
 
     private boolean hasCustomSeparator() {
