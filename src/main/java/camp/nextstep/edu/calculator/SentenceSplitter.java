@@ -8,9 +8,8 @@ import java.util.regex.Pattern;
 import org.thymeleaf.util.StringUtils;
 
 public class SentenceSplitter {
-
     private static final Pattern DEFAULT_SPLIT_PATTERN = Pattern.compile(":|,");
-    public static final Pattern CUSTOM_SPLIT_REGEX = Pattern.compile("//(.)\\n(.*)");
+    private static final Pattern CUSTOM_SPLIT_REGEX = Pattern.compile("//(.)\\n(.*)");
 
     public static List<String> split(String input) {
         if (StringUtils.isEmpty(input)) {

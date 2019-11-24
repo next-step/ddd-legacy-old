@@ -12,15 +12,15 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class StringCalculatorTest {
+class CalculatorTest {
 
     @DisplayName("기본(:|,) 구분자로 문자열을 파싱하여 문자열 숫자의 합을 반환한다")
     @ParameterizedTest
     @MethodSource("defaultStrategy")
     void calculate(String testString, int expected) {
         //when
-        StringCalculator calculator = new StringCalculator();
-        long result = calculator.calculateSum(testString);
+        Calculator calculator = new Calculator();
+        long result = calculator.sum(testString);
         //then
         assertThat(result).isEqualTo(expected);
     }
@@ -30,8 +30,8 @@ class StringCalculatorTest {
     @NullAndEmptySource
     void calculate_given_null_or_empty_string(String testString) {
         //when
-        StringCalculator calculator = new StringCalculator();
-        long result = calculator.calculateSum(testString);
+        Calculator calculator = new Calculator();
+        long result = calculator.sum(testString);
         //then
         assertThat(result).isEqualTo(0);
     }
@@ -41,8 +41,8 @@ class StringCalculatorTest {
     @MethodSource("customStrategy")
     void calculate_given_custom_splitter(String testString, long expected) {
         //when
-        StringCalculator calculator = new StringCalculator();
-        long result = calculator.calculateSum(testString);
+        Calculator calculator = new Calculator();
+        long result = calculator.sum(testString);
         //then
         assertThat(result).isEqualTo(expected);
     }
@@ -60,8 +60,8 @@ class StringCalculatorTest {
     void calculate_given_invalid_number(String testString) {
         //when
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            StringCalculator calculator = new StringCalculator();
-            long result = calculator.calculateSum(testString);
+            Calculator calculator = new Calculator();
+            long result = calculator.sum(testString);
         });
     }
 

@@ -13,8 +13,7 @@ public class PatternTest {
     }
     @Test
     public void compile_escaped() {
-//        Pattern compile1 = Pattern.compile("|", Pattern.LITERAL);
-        Pattern compile1 = Pattern.compile(Pattern.quote("|"));
+        Pattern compile1 = Pattern.compile("|", Pattern.LITERAL);
         assertThat(compile1.split("a|b")).contains("a","b");
     }
     @Test
