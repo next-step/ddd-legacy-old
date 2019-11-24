@@ -4,24 +4,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Numbers {
+public class StringNumbers {
 
-    private List<Number> numbers;
+    private List<StringNumber> items;
 
-    private Numbers(List<Number> numbers) {
-        this.numbers = numbers;
+    private StringNumbers(List<StringNumber> items) {
+        this.items = items;
     }
 
-    public static Numbers create(String[] texts) {
-        final List<Number> numbers = Stream.of(texts)
-                .map(Number::create)
+    public static StringNumbers create(String[] texts) {
+        final List<StringNumber> items = Stream.of(texts)
+                .map(StringNumber::create)
                 .collect(Collectors.toList());
-        return new Numbers(numbers);
+        return new StringNumbers(items);
     }
 
     public int sum() {
-        numbers.stream()
-                .map(Number::getNumber)
+        return items.stream()
+                .map(StringNumber::getItem)
                 .reduce(0, Integer::sum);
     }
 }
