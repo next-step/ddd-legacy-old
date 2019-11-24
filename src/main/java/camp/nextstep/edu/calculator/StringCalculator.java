@@ -1,12 +1,14 @@
 package camp.nextstep.edu.calculator;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
     private static final String DEFAULT_DELIMITER = "[,:]";
     private static final String REGEX = "//(.)\n(.*)";
+    private static final Pattern CUSTOM_DELIMITER = Pattern.compile(REGEX);
 
     private static final int DEFAULT_VALUE = 0;
 
@@ -20,12 +22,11 @@ public class StringCalculator {
     }
 
     private boolean isEmpty(String input) {
-        return input == null || input.isEmpty();
+        return Objects.isNull(input) || input.isEmpty();
     }
 
     private String[] parse(String input) {
-        Pattern pattern = Pattern.compile(REGEX);
-        Matcher matcher = pattern.matcher(input);
+        Matcher matcher = CUSTOM_DELIMITER.matcher(input);
 
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
