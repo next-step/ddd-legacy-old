@@ -14,9 +14,15 @@ class Expressions {
 
     private static String[] validExpressions;
 
+    private Expressions(String[] expressions) {
+        validExpressions = expressions;
+    }
+
     static Expressions of(final String expression) {
-        validExpressions = split(expression);
-        return new Expressions();
+        if (isNullExpression(expression)) {
+            return new Expressions(NULL_EXPRESSION);
+        }
+        return new Expressions(split(expression));
     }
 
     String[] getValidExpressions() {
@@ -32,9 +38,6 @@ class Expressions {
     }
 
     private static String[] split(final String expression) {
-        if (isNullExpression(expression)) {
-            return NULL_EXPRESSION;
-        }
         final Matcher matcher = PATTERN.matcher(expression);
         if (isCustomDelimiter(matcher)) {
             return splitByDelimiter(
