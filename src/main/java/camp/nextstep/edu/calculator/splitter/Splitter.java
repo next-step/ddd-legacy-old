@@ -1,4 +1,4 @@
-package camp.nextstep.edu.calculator;
+package camp.nextstep.edu.calculator.splitter;
 
 public interface Splitter {
 

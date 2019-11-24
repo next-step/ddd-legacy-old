@@ -1,5 +1,9 @@
 package camp.nextstep.edu.calculator;
 
+import camp.nextstep.edu.calculator.number.Numbers;
+import camp.nextstep.edu.calculator.splitter.Splitter;
+import camp.nextstep.edu.calculator.splitter.SplitterRegistry;
+
 public class StringCalculator {
 
     private final SplitterRegistry splitterRegistry;

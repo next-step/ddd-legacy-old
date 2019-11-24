@@ -1,4 +1,4 @@
-package camp.nextstep.edu.calculator;
+package camp.nextstep.edu.calculator.number;
 
 import java.util.Arrays;
 import java.util.List;

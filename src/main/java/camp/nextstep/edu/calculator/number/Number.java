@@ -1,4 +1,4 @@
-package camp.nextstep.edu.calculator;
+package camp.nextstep.edu.calculator.number;
 
 import camp.nextstep.edu.util.StringUtils;
 

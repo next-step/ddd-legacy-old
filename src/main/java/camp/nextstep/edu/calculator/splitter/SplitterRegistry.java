@@ -1,4 +1,4 @@
-package camp.nextstep.edu.calculator;
+package camp.nextstep.edu.calculator.splitter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,4 +19,5 @@ public class SplitterRegistry {
                 .findFirst()
                 .orElse(DEFAULT_SPLITTER);
     }
+
 }

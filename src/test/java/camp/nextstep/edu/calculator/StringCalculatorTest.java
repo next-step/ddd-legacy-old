@@ -1,5 +1,7 @@
 package camp.nextstep.edu.calculator;
 
+import camp.nextstep.edu.calculator.splitter.CustomDelimiterSplitter;
+import camp.nextstep.edu.calculator.splitter.SplitterRegistry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package camp.nextstep.edu.calculator;
+package camp.nextstep.edu.calculator.splitter;
 
 import camp.nextstep.edu.util.NullAndEmptyAndWhiteSpaceStringSource;
 import org.junit.jupiter.api.DisplayName;
