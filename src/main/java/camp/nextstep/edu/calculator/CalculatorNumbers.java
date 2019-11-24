@@ -10,13 +10,18 @@ class CalculatorNumbers {
     private List<Number> numberList = new ArrayList<>();
 
     void add(String[] numbers) {
-        List<Number> newNumbers = Stream.of(numbers).map(Integer::new).map(Number::new)
+        List<Number> newNumbers = Stream.of(numbers)
+            .map(Integer::new)
+            .map(Number::new)
             .collect(Collectors.toList());
+
         numberList.addAll(newNumbers);
     }
 
     int totalSum() {
-        return numberList.stream().map(number -> number.getNumber()).reduce(0, Integer::sum);
+        return numberList.stream()
+            .map(number -> number.getNumber())
+            .reduce(0, Integer::sum);
     }
 
 }
