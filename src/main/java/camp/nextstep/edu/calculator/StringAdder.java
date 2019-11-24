@@ -14,7 +14,7 @@ public class StringAdder {
         }
 
         final List<PositiveNumber> numbers = expression.retrieveNumbers();
-        return getSumOf(numbers).getValue();
+        return getSumOf(numbers).toInt();
     }
 
     private static PositiveNumber getSumOf(final List<PositiveNumber> numbers) {

@@ -11,7 +11,7 @@ public class PositiveNumber {
         this.value = value;
     }
 
-    int getValue() {
+    int toInt() {
         return value;
     }
 
