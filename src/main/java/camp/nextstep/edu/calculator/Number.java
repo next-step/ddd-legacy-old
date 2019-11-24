@@ -1,7 +1,5 @@
 package camp.nextstep.edu.calculator;
 
-import java.util.Objects;
-
 public class Number {
 
     private static final String ZERO = "0";
