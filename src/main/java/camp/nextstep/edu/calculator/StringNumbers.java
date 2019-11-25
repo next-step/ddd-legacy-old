@@ -21,7 +21,7 @@ public class StringNumbers {
 
     public int sum() {
         return items.stream()
-                .map(StringNumber::getItem)
-                .reduce(0, Integer::sum);
+                .mapToInt(StringNumber::getItem)
+                .sum();
     }
 }
