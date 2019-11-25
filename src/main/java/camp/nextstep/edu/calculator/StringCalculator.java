@@ -18,28 +18,16 @@ public class StringCalculator {
 
         String delimeter = DEFAULT_DELIMETER_TOKEN;
         String numberText = text;
-        if (hasCustomDelimeterExpression(text)) {
-            delimeter = extract(text, 1);
-            numberText = extract(text, 2);
+        Matcher matcher = CUSTOM_DELIMETER_PATTERN.matcher(text);
+        if (matcher.find()) {
+            delimeter = matcher.group(1);
+            numberText = matcher.group(2);
         }
         return sum(numberText, delimeter);
     }
 
     private boolean isEmptyOrNull(final String text) {
         return text == null || text.isEmpty();
-    }
-
-    private boolean hasCustomDelimeterExpression(final String text) {
-        Matcher matcher = CUSTOM_DELIMETER_PATTERN.matcher(text);
-        return matcher.find();
-    }
-
-    private String extract(final String text, final int group) {
-        Matcher matcher = CUSTOM_DELIMETER_PATTERN.matcher(text);
-        if (matcher.find()) {
-            return matcher.group(group);
-        }
-        throw new IllegalArgumentException("No match found");
     }
 
     private int sum(final String text, final String delimeter) {
