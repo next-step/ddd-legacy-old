@@ -49,7 +49,8 @@ class StringCalculatorTest {
 
     @DisplayName(value = "//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다.")
     @ParameterizedTest
-    @ValueSource(strings = {"//;\n1;2;3"})
+    @ValueSource(strings = {"//;\n1;2;3",
+                            "//'\n1'2'3"})
     void customDelimiter(final String text) {
         assertThat(calculator.calculate(text)).isSameAs(6);
     }
@@ -59,5 +60,33 @@ class StringCalculatorTest {
     void negative() {
         assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> calculator.calculate("-1"));
+    }
+
+    @DisplayName(value = "문자열 계산기에 숫자 외의 값을 전달하는 경우 RuntimeException 예외 처리를 한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;2;a",
+                            "1::5",
+                            "//;\n"})
+    void nonString(final String text) {
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> calculator.calculate(text));
+    }
+
+    @DisplayName(value = "//와 \\n 문자 사이에 아무것도 넣지 않은 경우 IllegalArgumentException 예외 처리를 한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"//\n1,2,3",
+                             "//\n1"})
+    void noCustomDelimiter(final String text) {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> calculator.calculate(text));
+    }
+
+    @DisplayName(value = "구분자로 나누어지지 않는 숫자열이 전달될 경우 RuntimeException 예외 처리를 한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1,2,3",
+                            "1;2;3"})
+    void noNumberSplit(final String text) {
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> calculator.calculate(text));
     }
 }
