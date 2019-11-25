@@ -2,6 +2,8 @@ package camp.nextstep.edu.calculator;
 
 public class StringNumber {
 
+    private static int ZERO = 0;
+
     private int item;
 
     private StringNumber(int item) {
@@ -10,8 +12,12 @@ public class StringNumber {
     }
 
     private void validate(int item) {
-        if(NumberHelper.isNegative(item))
+        if(this.isNegative(item))
             throw  new IllegalArgumentException();
+    }
+
+    private boolean isNegative(int number) {
+        return number < ZERO;
     }
 
     public static StringNumber create(String text) {
