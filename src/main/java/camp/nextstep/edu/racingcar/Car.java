@@ -1,5 +1,7 @@
 package camp.nextstep.edu.racingcar;
 
+import org.apache.logging.log4j.util.Strings;
+
 public class Car {
     private final String name;
     private int position;
@@ -14,7 +16,7 @@ public class Car {
         this.position = position;
     }
 
-    void move(final RandomMovingStrategy movingStrategy) {
+    void move(final MovingStrategy movingStrategy) {
         if (movingStrategy.movable()) {
             position++;
         }
@@ -25,8 +27,8 @@ public class Car {
     }
 
     private void validate(final String name) {
-        if (name == null || name.length() > 5) {
-            throw new IllegalArgumentException();
+        if (Strings.isEmpty(name) || name.length() > 5) {
+            throw new IllegalArgumentException("이름은 5글짜를 초과할 수 없습니다.");
         }
     }
 }
