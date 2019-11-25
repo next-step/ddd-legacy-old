@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("Zero 테스트")
 class ZeroTest {
 
-    @DisplayName("Zero에 값을 더하면 입력한 값을 반환한다.")
+    @DisplayName("값을 더하면 입력한 값을 반환한다.")
     @ParameterizedTest
     @ValueSource(strings = {"1", "3", "8", "100"})
     void sum(final String source) {
@@ -18,10 +18,10 @@ class ZeroTest {
         final Number number = Value.of(source);
 
         // when
-        final Number expected = zero.sum(number);
+        final Number result = zero.sum(number);
 
         // then
-        assertThat(number).isEqualTo(expected);
+        assertThat(result).isEqualTo(number);
     }
 
     @DisplayName("intValue 호출 시 int 타입으로 반환한다.")
@@ -33,9 +33,9 @@ class ZeroTest {
         final int intValue = Integer.parseInt(source);
 
         // when
-        final int expected = number.intValue();
+        final int result = number.intValue();
 
         // then
-        assertThat(intValue).isEqualTo(expected);
+        assertThat(result).isEqualTo(intValue);
     }
 }
