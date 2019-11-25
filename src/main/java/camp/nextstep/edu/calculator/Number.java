@@ -6,8 +6,6 @@ import java.util.Objects;
 
 public final class Number {
     public static final int ZERO_VALUE = 0;
-    public static final int ONE = 1;
-    public static final int TWO = 2;
     private int value;
 
     private Number(final int number) {
