@@ -8,7 +8,7 @@ public class StringCalculator {
 
     private static final int DEFAULT_RESULT_NUMBER = 0;
     private static final String DEFAULT_DELIMITER_REGEX = ",|:";
-    private static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
+    private static final String CUSTOM_DELIMITER_REGEX = "//(.*)\n(.*)";
 
     public int calculate(String input) {
 
@@ -42,6 +42,10 @@ public class StringCalculator {
     }
 
     private String[] split(String text, String delimiter) {
+        if(isEmpty(delimiter)) {
+            throw new IllegalArgumentException("Illegal input: no delimiter entered");
+        }
+
         return text.split(delimiter);
     }
 
