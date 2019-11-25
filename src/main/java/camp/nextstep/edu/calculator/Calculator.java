@@ -22,7 +22,8 @@ public class Calculator {
                 .map(Number::of)
                 .collect(Collectors.toList());
 
-        return getSum(numbers);
+        Number sum = getSum(numbers);
+        return sum.getNumber();
     }
 
     private String[] split(String input) {
@@ -38,10 +39,14 @@ public class Calculator {
         return input.split(delimiter);
     }
 
-    private int getSum(List<Number> numbers) {
-        return numbers.stream()
-                .mapToInt(Number::getNumber)
-                .sum();
+    private Number getSum(List<Number> numbers) {
+        Number sum = Number.of(0);
+
+        for (Number number : numbers) {
+            sum.add(number);
+        }
+
+        return sum;
     }
 
     private boolean isEmptyString(String str) {

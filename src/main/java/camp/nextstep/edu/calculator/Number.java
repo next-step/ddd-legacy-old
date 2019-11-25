@@ -6,9 +6,7 @@ public class Number {
 
     private static final int MIN_NUMBER = 0;
 
-    private Number(String text) {
-        int number = Integer.parseInt(text);
-
+    private Number(int number) {
         if (number < MIN_NUMBER) {
             throw new RuntimeException();
         }
@@ -16,8 +14,22 @@ public class Number {
         this.number = number;
     }
 
+    private Number(String text) {
+        this(Integer.parseInt(text));
+    }
+
+    public Number add(Number number) {
+        this.number += number.getNumber();
+
+        return this;
+    }
+
     public int getNumber() {
         return number;
+    }
+
+    public static Number of(int number) {
+        return new Number(number);
     }
 
     public static Number of(String text) {
