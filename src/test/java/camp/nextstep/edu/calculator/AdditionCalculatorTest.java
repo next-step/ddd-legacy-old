@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -44,6 +45,16 @@ class AdditionCalculatorTest {
         // when
         // then
         assertThat(calculator.execute(input)).isEqualTo(Integer.parseInt(input));
+    }
+
+    @DisplayName("숫자 두 개를 컴마(,) 구분자로 입력 시, 두 숫자의 합 반환")
+    @ParameterizedTest
+    @CsvSource(value = {"0,2:2", "99,999:1098"}, delimiter = ':')
+    void twoNumbersWithComma(final String input, final int result) {
+        // given
+        // when
+        // then
+        assertThat(calculator.execute(input)).isEqualTo(result);
     }
 }
 
