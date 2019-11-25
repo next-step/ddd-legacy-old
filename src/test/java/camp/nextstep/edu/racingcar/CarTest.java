@@ -12,7 +12,7 @@ class CarTest {
 
     @DisplayName("자동차 생성")
     @Test
-    void create() {
+    void create(){
         final Car car = new Car("seha", 1);
     }
 
@@ -46,6 +46,15 @@ class CarTest {
     void nullCarname() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Car(null, 1));
+        }
     }
-}
+
+
+    @ParameterizedTest
+    void move() {
+        Car car = new Car("name", 0);
+        car.move(new TestMovingStrategy());
+        assertThat(car.isInPosition(1)).isTrue();
+        }
+    }
 
