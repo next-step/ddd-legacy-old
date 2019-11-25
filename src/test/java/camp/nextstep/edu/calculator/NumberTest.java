@@ -16,9 +16,9 @@ class NumberTest {
 
     @DisplayName("Number 객체의 인스턴스를 생성할 수 있다.")
     @Test
-    public void createNumber() {
+    public void intValueOfNumber() {
         // when
-        number = new Number("1");
+        number = Number.intValueOf("1");
 
         // then
         assertThat(number).isNotNull();
@@ -29,7 +29,7 @@ class NumberTest {
     @ValueSource(strings = {"-1", "ㅁㄴㅇㄹ", "asdf"})
     public void validNumberTest(String text) {
         assertThatExceptionOfType(RuntimeException.class)
-                .isThrownBy(() -> new Number(text));
+                .isThrownBy(() -> Number.intValueOf(text));
     }
 
     @DisplayName("Number 인스턴스의 값을 갖고 올 수 있다.")
@@ -37,7 +37,7 @@ class NumberTest {
     @CsvSource(value = {"0,0", "1,1", "10,10", "1000,1000"})
     public void getValue(String input, int expected) {
         // given - Number 객체 생성
-        Number number = new Number(input);
+        Number number = Number.intValueOf(input);
 
         // when
         int value = number.getValue();

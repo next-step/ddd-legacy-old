@@ -1,35 +1,45 @@
 package camp.nextstep.edu.calculator;
 
-public class Number {
-    public static final int ZERO = 0;
+import org.apache.logging.log4j.util.Strings;
+
+import java.util.Objects;
+
+public final class Number {
+    public static final int ZERO_VALUE = 0;
     public static final int ONE = 1;
     public static final int TWO = 2;
     private int value;
 
-    public Number(String text) {
-        int number = parse(text);
+    private Number(final int number) {
         if (isNegative(number)) {
             throw new RuntimeException(String.format(Constants.RUNTIME_EXCEPTION_MESSAGE, number));
         }
         this.value += number;
     }
 
-    private int parse(String text) {
-        int number = ZERO;
-        try {
-            number = Integer.parseInt(text);
-        } catch (NumberFormatException e) {
-            throw new RuntimeException(new NumberFormatException(
-                    String.format(Constants.NUMBER_FORMAT_EXCEPTION_MESSAGE, number)));
-        }
-        return number;
+    public static Number intValueOf(final String text) {
+        int number = Integer.parseInt(text);
+        return new Number(number);
     }
 
     private boolean isNegative(int number) {
-        return number < ZERO;
+        return number < ZERO_VALUE;
     }
 
     public int getValue() {
         return this.value;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final Number number = (Number) o;
+        return value == number.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }
