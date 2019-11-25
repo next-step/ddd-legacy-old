@@ -1,15 +1,20 @@
 package camp.nextstep.edu.calculator;
 
 public class Number {
-    private int number;
     public static final int ZERO = 0;
     public static final int ONE = 1;
     public static final int TWO = 2;
+    private int value;
 
-    public Number() {
+    public Number(String text) {
+        int number = parse(text);
+        if (isNegative(number)) {
+            throw new RuntimeException(String.format(Constants.RUNTIME_EXCEPTION_MESSAGE, number));
+        }
+        this.value += number;
     }
 
-    public int parse(String text) {
+    private int parse(String text) {
         int number = ZERO;
         try {
             number = Integer.parseInt(text);
@@ -20,20 +25,11 @@ public class Number {
         return number;
     }
 
-    public void add(String text) {
-        int number = parse(text);
-        if (isNegative(number)) {
-            throw new RuntimeException(
-                    String.format(Constants.RUNTIME_EXCEPTION_MESSAGE, number));
-        }
-        this.number += number;
-    }
-
-    public boolean isNegative(int number) {
+    private boolean isNegative(int number) {
         return number < ZERO;
     }
 
-    public int getNumber() {
-        return this.number;
+    public int getValue() {
+        return this.value;
     }
 }

@@ -2,6 +2,8 @@ package camp.nextstep.edu.calculator;
 
 import org.apache.logging.log4j.util.Strings;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,10 +30,14 @@ public class StringCalculator {
     }
 
     private int sum(final String[] separatedText) {
-        Number number = new Number();
-        for (int i = Number.ZERO; i < separatedText.length; i++) {
-            number.add(separatedText[i]);
+        List<Number> numbers = new ArrayList<>();
+
+        for (String text : separatedText) {
+            numbers.add(new Number(text));
         }
-        return number.getNumber();
+
+        return numbers.stream()
+                      .mapToInt(Number::getValue)
+                      .sum();
     }
 }
