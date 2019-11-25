@@ -50,21 +50,21 @@ class AdditionCalculatorTest {
     @DisplayName("숫자 두 개를 컴마(,) 구분자로 입력 시, 두 숫자의 합 반환")
     @ParameterizedTest
     @CsvSource(value = {"0,2:2", "99,999:1098"}, delimiter = ':')
-    void twoNumbersWithComma(final String input, final int result) {
+    void twoNumbersWithComma(final String input, final int expected) {
         // given
         // when
         // then
-        assertThat(calculator.execute(input)).isEqualTo(result);
+        assertThat(calculator.execute(input)).isEqualTo(expected);
     }
 
     @DisplayName("기본 구분자로 입력 시, 숫자의 합 반환")
     @ParameterizedTest
     @CsvSource(value = {"0,1,2|3", "99:999|1098", "1,2:3,4|10"}, delimiter = '|')
-    void numbersWithDefaultDelimiter(final String input, final int result) {
+    void numbersWithDefaultDelimiter(final String input, final int expected) {
         // given
         // when
         // then
-        assertThat(calculator.execute(input)).isEqualTo(result);
+        assertThat(calculator.execute(input)).isEqualTo(expected);
     }
 }
 

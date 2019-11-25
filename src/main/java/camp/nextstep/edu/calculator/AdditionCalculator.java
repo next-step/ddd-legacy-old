@@ -1,22 +1,15 @@
 package camp.nextstep.edu.calculator;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class AdditionCalculator {
-    private static final String DEFAULT_DELIMITER = ",|:";
-
     public int execute(final String input) {
-        if (CustomStringUtils.isEmpty(input)) {
-            return 0;
-        }
-
-        final String[] split = input.split(DEFAULT_DELIMITER);
-        return sum(split);
+        return sum(Extractor.getNumbers(input));
     }
 
-    private int sum(final String[] split) {
-        return Arrays.stream(split)
-                .mapToInt(value -> Integer.parseInt(value))
+    private int sum(final List<Integer> values) {
+        return values.stream()
+                .mapToInt(Integer::intValue)
                 .sum();
     }
 }
