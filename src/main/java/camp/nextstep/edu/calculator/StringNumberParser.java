@@ -7,31 +7,31 @@ public class StringNumberParser {
     private static final Pattern PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final String DEFAULT_DELIMITER = ",|:";
 
-    private StringNumberParser() {
+    public StringNumberParser() {
 
     }
 
-    public static String[] parse(String text) {
+    public String[] parse(String text) {
         if (StringHelper.isNullOrEmpty(text))
-            return parseEmptyText();
+            return this.parseEmptyText();
 
         final Matcher m = PATTERN.matcher(text);
         if (m.find())
-            return parseCustomText(m);
+            return this.parseCustomText(m);
 
-        return parseDefaultText(text);
+        return this.parseDefaultText(text);
     }
 
-    private static String[] parseEmptyText() {
+    private String[] parseEmptyText() {
         return new String[]{"0"};
     }
 
-    private static String[] parseCustomText(Matcher m) {
+    private String[] parseCustomText(Matcher m) {
         final String delimiter = m.group(1);
         return m.group(2).split(delimiter);
     }
 
-    private static String[] parseDefaultText(String text) {
+    private String[] parseDefaultText(String text) {
         return text.split(DEFAULT_DELIMITER);
     }
 }
