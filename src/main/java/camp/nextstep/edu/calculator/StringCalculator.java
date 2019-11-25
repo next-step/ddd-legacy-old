@@ -50,15 +50,8 @@ public class StringCalculator {
     }
 
     private int toPositiveNumber(final String token) {
-        int number = 0;
-        try {
-            number = Integer.parseInt(token);
-            checkNegativeNumber(number);
-        } catch (NumberFormatException e) {
-            throw new RuntimeException("숫자 이외의 값을 사용할 수 업습니다.");
-        } catch (NegativeNumberException e) {
-            throw new RuntimeException("음수를 사용할 수 없습니다.");
-        }
+        int number = Integer.parseInt(token);
+        checkNegativeNumber(number);
         return number;
     }
 
