@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.*;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class AdditionCalculatorTest {
     private AdditionCalculator calculator;
@@ -84,6 +85,17 @@ class AdditionCalculatorTest {
                 Arguments.of("//%\n1%2%4", 7),
                 Arguments.of("//a\n8a9", 17)
         );
+    }
+
+    @DisplayName("숫자 이외의 값 또는 음수 입력 시, RuntimeException 예외 처리 ")
+    @ParameterizedTest
+    @ValueSource(strings = {"a", "-1", "!", "1,-2:3", "//;\n1;a;3"})
+    void invalidInput(final String input) {
+        // given
+        // when
+        // then
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> calculator.execute(input));
     }
 }
 
