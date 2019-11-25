@@ -25,7 +25,7 @@ public class Car {
     }
 
     private void validate(final String name) {
-        if (name == null || name.length() > 5) {
+        if (name == null || name.length() > 5 || "".equals(name)) {
             throw new IllegalArgumentException();
         }
     }
