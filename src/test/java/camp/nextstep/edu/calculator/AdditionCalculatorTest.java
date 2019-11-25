@@ -4,9 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.*;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -66,5 +66,25 @@ class AdditionCalculatorTest {
         // then
         assertThat(calculator.execute(input)).isEqualTo(expected);
     }
+
+    @DisplayName("//와 \\n 문자 사이에 커스텀 구분자 사용 시, 숫자의 합 반환")
+    @ParameterizedTest
+    @MethodSource("provideInputUseCustomDelimiter")
+    void numbersWithCustomDelimiter(final String input, final int expected) {
+        // given
+        // when
+        // then
+        assertThat(calculator.execute(input)).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> provideInputUseCustomDelimiter() {
+        return Stream.of(
+                Arguments.of("//]\n8", 8),
+                Arguments.of("//;\n1;2;3", 6),
+                Arguments.of("//%\n1%2%4", 7),
+                Arguments.of("//a\n8a9", 17)
+        );
+    }
 }
+
 
