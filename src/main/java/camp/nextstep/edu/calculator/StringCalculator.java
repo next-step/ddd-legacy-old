@@ -26,8 +26,8 @@ public class StringCalculator {
         }
 
         final int[] numbers = parseNumbers(text);
-        exceptionNegativeNumber(numbers);
         return Arrays.stream(numbers)
+                .peek(this::exceptionIfNegativeNumber)
                 .sum();
     }
 
@@ -60,11 +60,8 @@ public class StringCalculator {
         return Arrays.stream(split);
     }
 
-    private void exceptionNegativeNumber(int[] numbers) {
-        final boolean hasNegativeNumber =  Arrays.stream(numbers)
-                .anyMatch(number -> number < 0);
-
-        if (hasNegativeNumber) {
+    private void exceptionIfNegativeNumber(int number) {
+        if (number < 0) {
             throw new RuntimeException();
         }
     }
