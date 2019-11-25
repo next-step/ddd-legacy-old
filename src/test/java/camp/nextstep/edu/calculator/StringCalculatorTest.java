@@ -10,8 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.*;
 
 class StringCalculatorTest {
     private StringCalculator calculator;
@@ -76,15 +75,17 @@ class StringCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"-1", "1,-2", "//;\n1;2;-3"})
     void negativeNumberTest(final String text) {
-        assertThatExceptionOfType(RuntimeException.class)
-                .isThrownBy(() -> calculator.add(text));
+        assertThatThrownBy(() -> calculator.add(text))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("Value must be greater than or equal to zero.");
     }
 
     @DisplayName("숫자 이외의 값을 입력할 경우 RuntimeException 예외 발생")
     @ParameterizedTest
     @ValueSource(strings = {"a,2,3", "1:b,3", "//;\n1;2;c"})
     void NumberFormatTest(final String text) {
-        assertThatExceptionOfType(RuntimeException.class)
-                .isThrownBy(() -> calculator.add(text));
+        assertThatThrownBy(() -> calculator.add(text))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("Input must be numeric.");
     }
 }

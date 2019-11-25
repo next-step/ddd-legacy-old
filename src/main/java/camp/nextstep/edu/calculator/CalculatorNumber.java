@@ -20,13 +20,13 @@ public class CalculatorNumber {
             this.value = Integer.parseInt(number);
             checkNegativeValue();
         } catch (NumberFormatException e) {
-            throw new RuntimeException();
+            throw new IllegalArgumentException("Input must be numeric.", e);
         }
     }
 
     private void checkNegativeValue() {
         if (this.value < 0) {
-            throw new RuntimeException();
+            throw new IllegalArgumentException("Value must be greater than or equal to zero.");
         }
     }
 
