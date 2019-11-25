@@ -12,8 +12,8 @@ public class StringNumber {
     }
 
     private void validate(int item) {
-        if(this.isNegative(item))
-            throw  new IllegalArgumentException();
+        if (this.isNegative(item))
+            throw new IllegalArgumentException("Additional message");
     }
 
     private boolean isNegative(int number) {
