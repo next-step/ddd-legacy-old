@@ -78,7 +78,8 @@ class StringCalculatorTest {
         assertThat(result).isEqualTo(6);
     }
 
-    @DisplayName("숫자 이외의 값 또는 음수이면 런타임 예외를 발생 한다.")
+    @DisplayName("숫자 이외의 " +
+            "값 또는 음수이면 런타임 예외를 발생 한다.")
     @ParameterizedTest
     @ValueSource(strings = {"-1", "ㅁㄴㅇㄹ", "asdf"})
     public void validNumberTest(String text) {
