@@ -1,6 +1,8 @@
 package camp.nextstep.edu.calculator;
 
 class Number {
+    private static final int ZERO = 0;
+    private static final String NOT_A_NUMBER_MESSAGE = "숫자를 입력하세요.";
     private Integer number;
 
     private Number(final String numberString) {
@@ -17,7 +19,7 @@ class Number {
     }
 
     private void validate(final int number) {
-        if (number < 0) {
+        if (number < ZERO) {
             throw new RuntimeException();
         }
     }
@@ -26,7 +28,7 @@ class Number {
         try {
             this.number = Integer.parseInt(number);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(Const.NOT_A_NUMBER_MESSAGE);
+            throw new IllegalArgumentException(NOT_A_NUMBER_MESSAGE);
         }
     }
 
