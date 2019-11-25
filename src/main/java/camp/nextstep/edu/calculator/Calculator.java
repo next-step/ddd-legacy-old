@@ -1,9 +1,11 @@
 package camp.nextstep.edu.calculator;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Calculator {
 
@@ -16,9 +18,9 @@ public class Calculator {
             return 0;
         }
 
-        Number[] numbers = Arrays.stream(split(input))
+        List<Number> numbers = Arrays.stream(split(input))
                 .map(Number::of)
-                .toArray(Number[]::new);
+                .collect(Collectors.toList());
 
         return getSum(numbers);
     }
@@ -36,8 +38,8 @@ public class Calculator {
         return input.split(delimiter);
     }
 
-    private int getSum(Number[] numbers) {
-        return Arrays.stream(numbers)
+    private int getSum(List<Number> numbers) {
+        return numbers.stream()
                 .mapToInt(Number::getNumber)
                 .sum();
     }
