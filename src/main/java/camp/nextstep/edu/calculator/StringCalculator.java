@@ -1,57 +1,40 @@
 package camp.nextstep.edu.calculator;
 
-import java.util.regex.Matcher;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
 
-    public static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("^//(.*)\n(.*)$");
-    public static final Pattern ONLY_USED_DEFAULT_DELIMITER = Pattern.compile("^[0-9:,]+$");
-    public static final Pattern ONLY_USED_NUMERIC_AND_HYPHEN = Pattern.compile("^[0-9-]+$");
+    private static final Pattern ONLY_USED_NUMERIC = Pattern.compile("^(?-)[0-9]+$");
 
-    public static final int MATCHER_GROUP_INDEX_DELIMITER = 1;
-    public static final int MATCHER_GROUP_INDEX_VALUE = 2;
+    public int add(String expression) {
 
-    public int add(String value) {
-
-        if (value == null || value.isEmpty()) {
+        if (expression == null || expression.isEmpty()) {
             return 0;
         }
 
-        if (ONLY_USED_NUMERIC_AND_HYPHEN.matcher(value).matches()) {
-            return parseIntAndThrowExceptionIfNumberIsNegative(value);
+        if (ONLY_USED_NUMERIC.matcher(expression).matches()) {
+            return getNumberValue(expression);
         }
 
-        if (ONLY_USED_DEFAULT_DELIMITER.matcher(value).matches()) {
-            String[] values = value.replaceAll(":", ",").split(",");
-            return sum(values);
-        }
-
-        Matcher customDelimiterMatcher = CUSTOM_DELIMITER_PATTERN.matcher(value);
-        if (customDelimiterMatcher.matches()) {
-            String customDelimiter = customDelimiterMatcher.group(MATCHER_GROUP_INDEX_DELIMITER);
-            String customDelimiterValues = customDelimiterMatcher.group(MATCHER_GROUP_INDEX_VALUE);
-
-            return sum(customDelimiterValues.split(customDelimiter));
-        }
-
-        throw new RuntimeException("Invalid value");
+        ExpressionParser parser = new ExpressionParser(expression);
+        return sum(parser.getValue());
     }
 
-    private int sum(String[] values) {
+    private int sum(List<String> valueList) {
         int sum = 0;
-        for (int i = 0, size = values.length; i < size; i++) {
-            sum += parseIntAndThrowExceptionIfNumberIsNegative(values[i]);
+        for (String value : valueList) {
+            sum += getNumberValue(value);
         }
         return sum;
     }
 
-    private int parseIntAndThrowExceptionIfNumberIsNegative(String value) {
-        int number = Integer.parseInt(value);
-        if (number < 0) {
-            throw new RuntimeException("Negative numbers are not allowed");
+    private int getNumberValue(String value) {
+        NumberValue numberValue = new NumberValue(value);
+        if (numberValue.isNegative()) {
+            throw new NegativeNumberException();
         }
-        return number;
+        return numberValue.getNumber();
     }
 
 }
