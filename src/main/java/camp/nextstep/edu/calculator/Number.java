@@ -1,7 +1,5 @@
 package camp.nextstep.edu.calculator;
 
-import org.apache.logging.log4j.util.Strings;
-
 import java.util.Objects;
 
 public final class Number {
