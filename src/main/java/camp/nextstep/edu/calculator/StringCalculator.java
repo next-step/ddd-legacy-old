@@ -10,15 +10,15 @@ public class StringCalculator {
 	/**
 	 * Add string of integer numbers which is included with comma(,) or colon(:)
 	 *
-	 * @param numbers
+	 * @param numbersText
 	 * @return sum of integer numbers
 	 */
-	public int add(final String numbers) {
-		if (StringUtils.isEmpty(numbers)) {
+	public int add(final String numbersText) {
+		if (StringUtils.isEmpty(numbersText)) {
 			return 0;
 		}
 
-		return Arrays.stream(numbers.split(DELIMITER))
+		return Arrays.stream(numbersText.split(DELIMITER))
 			.mapToInt(Integer::valueOf)
 			.sum();
 	}
