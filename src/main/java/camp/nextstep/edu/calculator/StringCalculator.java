@@ -1,11 +1,24 @@
 package camp.nextstep.edu.calculator;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class StringCalculator {
+
+    static final String DEFAULT_PATTERN_REGEX = "//(.*)\\n(.*)";
+
+    private final Pattern pattern;
+
+    public StringCalculator() {
+        this(DEFAULT_PATTERN_REGEX);
+    }
+
+    public StringCalculator(final String patternRegex) {
+        this.pattern = Pattern.compile(defaultIfPatternRegex(patternRegex));
+    }
 
     public int add(String text) {
         if (isBlank(text)) {
@@ -29,7 +42,6 @@ public class StringCalculator {
     }
 
     private Stream<String> split(String text) {
-        final Pattern pattern = Pattern.compile("//(.*)\\n(.*)");
         final Matcher matcher = pattern.matcher(text);
         final String defaultDelimiter = ",:";
 
@@ -55,5 +67,11 @@ public class StringCalculator {
         if (hasNegativeNumber) {
             throw new RuntimeException();
         }
+    }
+
+    private String defaultIfPatternRegex(String inputPatternRegex) {
+        return Optional.ofNullable(inputPatternRegex)
+                .filter(regex -> !isBlank(regex))
+                .orElse(DEFAULT_PATTERN_REGEX);
     }
 }

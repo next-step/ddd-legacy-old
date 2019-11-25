@@ -19,6 +19,22 @@ class StringCalculatorTest {
         calculator = new StringCalculator();
     }
 
+    @DisplayName(value = "문자열 계산기 기본 정규표현식 설정")
+    @ParameterizedTest
+    @NullAndEmptySource
+    void defaultCalculator(final String text) {
+        final StringCalculator defaultCalculator = new StringCalculator();
+        assertThat(defaultCalculator.add(text)).isEqualTo(0);
+    }
+
+    @DisplayName(value = "문자열 계산기 정규표현식 직접 입력")
+    @ParameterizedTest
+    @NullAndEmptySource
+    void inputRegexCalculator(final String text) {
+        final StringCalculator defaultCalculator = new StringCalculator(StringCalculator.DEFAULT_PATTERN_REGEX);
+        assertThat(defaultCalculator.add(text)).isEqualTo(0);
+    }
+
     @DisplayName(value = "빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.")
     @ParameterizedTest
     @NullAndEmptySource
