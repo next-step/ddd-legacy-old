@@ -61,11 +61,11 @@ class StringCalculatorTest {
                 .isThrownBy(() -> calculator.add("-1"));
     }
 
-    @DisplayName(value = "문자열 계산기에 유효하지 않은 값을 전달하는 경우 RuntimeException 예외 처리를 한다.")
+    @DisplayName(value = "문자열 계산기에 유효하지 않은 값을 전달하는 경우 NumberFormatException 예외 처리를 한다.")
     @ParameterizedTest
-    @ValueSource(strings = {"////;\n1;2;3", "1|2|3", "1/2/3"})
+    @ValueSource(strings = {"////;\n1;2;3", "1|2|3", "1/2/3", "1-2-3"})
     void invalidValue(final String text) {
-        assertThatExceptionOfType(RuntimeException.class)
+        assertThatExceptionOfType(NumberFormatException.class)
                 .isThrownBy(() -> calculator.add(text));
     }
 }
