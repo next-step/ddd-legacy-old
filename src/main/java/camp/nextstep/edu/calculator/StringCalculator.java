@@ -11,7 +11,6 @@ public class StringCalculator {
     private static final String CUSTOM_DELIMITER_REGEX = "//(.*)\n(.*)";
 
     public int calculate(String input) {
-
         if (isEmpty(input)) {
             return DEFAULT_RESULT_NUMBER;
         }
