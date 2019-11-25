@@ -53,9 +53,9 @@ class CarTest {
         // given
         final int START_POSITION = 0;
         final Car car = new Car("car", START_POSITION);
+        final MovingStrategy movingStrategy = new ManualMovingStrategy(move);
 
         // when
-        final MovingStrategy movingStrategy = new ManualMovingStrategy(move);
         car.move(movingStrategy);
 
         // then
