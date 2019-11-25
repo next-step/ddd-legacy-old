@@ -5,10 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EmptySource;
-import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.springframework.beans.factory.annotation.Value;
 
 class CalculatorTest {
 
@@ -21,8 +19,7 @@ class CalculatorTest {
 
     @DisplayName("빈 문자열 또는 null이 입력될 경우 0을 반환한다")
     @ParameterizedTest
-    @NullSource
-    @EmptySource
+    @NullAndEmptySource
     void inputIsEmptyOrNull(String input) {
         Assertions.assertThat(calculator.add(input))
                 .isEqualTo(0);
