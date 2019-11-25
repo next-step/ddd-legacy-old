@@ -56,5 +56,15 @@ class AdditionCalculatorTest {
         // then
         assertThat(calculator.execute(input)).isEqualTo(result);
     }
+
+    @DisplayName("기본 구분자로 입력 시, 숫자의 합 반환")
+    @ParameterizedTest
+    @CsvSource(value = {"0,1,2|3", "99:999|1098", "1,2:3,4|10"}, delimiter = '|')
+    void numbersWithDefaultDelimiter(final String input, final int result) {
+        // given
+        // when
+        // then
+        assertThat(calculator.execute(input)).isEqualTo(result);
+    }
 }
 

@@ -3,7 +3,7 @@ package camp.nextstep.edu.calculator;
 import java.util.Arrays;
 
 public class AdditionCalculator {
-    private static final String DEFAULT_DELIMITER = ",";
+    private static final String DEFAULT_DELIMITER = ",|:";
 
     public int execute(final String input) {
         if (CustomStringUtils.isEmpty(input)) {
