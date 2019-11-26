@@ -1,5 +1,6 @@
 package camp.nextstep.edu.calculator;
 
+import camp.nextstep.edu.calculator.exception.NegativeNumberException;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,6 +10,7 @@ public class StringCalculator {
 
 	private static final String DELIMITER = ",|:";
 	private static final String PATTERN_DELIMITER = "//(.)\n(.*)";
+	private static final int ZERO_VALUE = 0;
 
 	/**
 	 * Add string of integer numbers which is included with comma(,) or colon(:)
@@ -39,8 +41,34 @@ public class StringCalculator {
 	 */
 	private int sum(String[] numbers) {
 		return Arrays.stream(numbers)
-			.mapToInt(Integer::valueOf)
+			.mapToInt(this::parseInt)
 			.sum();
+	}
+
+	/**
+	 * Parse string number into integer number
+	 *
+	 * @param number
+	 * @return parsed integer value
+	 */
+	private int parseInt(final String number) {
+		int parsedNumber = Integer.parseInt(number);
+
+		if (isNegativeNumber(parsedNumber)) {
+			throw new NegativeNumberException(parsedNumber);
+		}
+
+		return parsedNumber;
+	}
+
+	/**
+	 * Check whether positive number or not
+	 *
+	 * @param number
+	 * @return boolean value whether positive number or not
+	 */
+	private boolean isNegativeNumber(final int number) {
+		return number < ZERO_VALUE;
 	}
 
 	/**
