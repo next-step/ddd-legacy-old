@@ -8,7 +8,7 @@ import org.springframework.util.StringUtils;
 
 public class StringCalculator {
 
-	private static final String DELIMITER = ",|:";
+    private static final String DELIMITER = ",|:";
 	private static final String PATTERN_DELIMITER = "//(.)\n(.*)";
 	private static final int ZERO_VALUE = 0;
 
