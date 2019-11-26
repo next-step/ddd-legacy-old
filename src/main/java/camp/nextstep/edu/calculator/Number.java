@@ -10,7 +10,7 @@ public final class Number {
         if (isNegative(number)) {
             throw new RuntimeException(String.format(Constants.RUNTIME_EXCEPTION_MESSAGE, number));
         }
-        this.value += number;
+        this.value = number;
     }
 
     public static Number intValueOf(final String text) {
