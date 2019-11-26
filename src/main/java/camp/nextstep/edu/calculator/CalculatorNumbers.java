@@ -20,7 +20,7 @@ class CalculatorNumbers {
 
     int totalSum() {
         return numberList.stream()
-            .map(Number::getNumber)
+            .map(Number::toInt)
             .reduce(0, Integer::sum);
     }
 

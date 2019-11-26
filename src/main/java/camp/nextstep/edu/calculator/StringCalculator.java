@@ -6,11 +6,15 @@ import java.util.regex.Pattern;
 class StringCalculator {
 
     private static final String CUSTOM_DELIMITER = "//(.)\\n(.*)";
+    private static final String DEFAULT_DELIMITER = ",|:";
+
+    private Pattern pattern;
 
     private CalculatorNumbers calculatorNumbers;
 
     StringCalculator() {
         calculatorNumbers = new CalculatorNumbers();
+        pattern = Pattern.compile(CUSTOM_DELIMITER);
     }
 
     int add(final String text) {
@@ -27,12 +31,12 @@ class StringCalculator {
 
     private Delimiter findNumberText(final String text) {
 
-        Matcher m = Pattern.compile(CUSTOM_DELIMITER).matcher(text);
+        Matcher m = pattern.matcher(text);
         if (m.find()) {
             return new Delimiter(m.group(2), m.group(1));
         }
 
-        return new Delimiter(text, ",|:");
+        return new Delimiter(text, DEFAULT_DELIMITER);
     }
 
 }

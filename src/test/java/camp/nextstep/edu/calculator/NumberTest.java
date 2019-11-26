@@ -16,7 +16,7 @@ class NumberTest {
 
         Number number = new Number(parameterNumber);
 
-        int reult = number.getNumber();
+        int reult = number.toInt();
 
         assertThat(reult).isEqualTo(parameterNumber);
     }
