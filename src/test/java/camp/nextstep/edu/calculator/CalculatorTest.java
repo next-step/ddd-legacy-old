@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
@@ -22,10 +23,10 @@ class CalculatorTest {
         calculator = new Calculator();
     }
 
-    @DisplayName("빈 문자열을 넘기면 결과값으로 0을 반환한다")
+    @DisplayName("Null 또는 빈 문자열을 넘기면 결과값으로 0을 반환한다")
     @ParameterizedTest
-    @ValueSource(strings = {"", " ", "  "})
-    void 빈_문자열을_넘기면_결과값으로_0을_반환한다(String str) {
+    @NullAndEmptySource
+    void Null_또는_빈_문자열을_넘기면_결과값으로_0을_반환한다(String str) {
         // when:
         int result = calculator.add(str);
         // then:
