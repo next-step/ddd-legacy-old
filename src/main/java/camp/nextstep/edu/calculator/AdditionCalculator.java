@@ -1,15 +1,13 @@
 package camp.nextstep.edu.calculator;
 
-import java.util.List;
-
 public class AdditionCalculator {
-    public int execute(final String input) {
-        return sum(Extractor.getNumbers(input));
+    private final Extractor extractor;
+
+    AdditionCalculator(final Extractor extractor) {
+        this.extractor = extractor;
     }
 
-    private int sum(final List<Integer> values) {
-        return values.stream()
-                .mapToInt(Integer::intValue)
-                .sum();
+    public int execute(final String input) {
+        return this.extractor.get(input).sum();
     }
 }

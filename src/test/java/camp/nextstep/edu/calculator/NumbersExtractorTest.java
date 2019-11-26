@@ -1,5 +1,6 @@
 package camp.nextstep.edu.calculator;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -8,31 +9,43 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-class ExtractorTest {
-    @DisplayName("숫자 하나 입력 시, 해당 숫자 반환")
+class NumbersExtractorTest {
+    private Extractor extractor;
+
+    @BeforeEach
+    void setUp() {
+        this.extractor = NumbersExtractor.of();
+    }
+
+    @DisplayName("숫자 하나 입력 시, 해당 숫자의 Number 반환")
     @ParameterizedTest
     @ValueSource(strings = {"0", "1", "11", "128", "2000"})
     void returnInputValue(final String input) {
         // given
         // when
         // then
-        assertThat(Extractor.getNumbers(input))
-                .isEqualTo(Arrays.asList(Integer.parseInt(input)));
+        assertThat(extractor.get(input))
+                .isEqualTo(new Numbers(PositiveOrZeroNumber.of(Integer.parseInt(input))));
     }
 
-    @DisplayName("입력한 문자들을 정수 리스트로 반환")
+    @DisplayName("입력한 문자들을 Numbers로 반환")
     @ParameterizedTest
     @MethodSource("provideInputWithArray")
-    void returnIntList(final String input, final List<Integer> expected) {
+    void returnNumbers(final String input, final List<Integer> list) {
         // given
         // when
+        final Numbers expected = new Numbers(list.stream()
+                .map(PositiveOrZeroNumber::of)
+                .collect(Collectors.toList()));
+
         // then
-        assertThat(Extractor.getNumbers(input)).isEqualTo(expected);
+        assertThat(extractor.get(input)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> provideInputWithArray() {
@@ -52,6 +65,6 @@ class ExtractorTest {
         // when
         // then
         assertThatExceptionOfType(RuntimeException.class)
-                .isThrownBy(() -> Extractor.getNumbers(input));
+                .isThrownBy(() -> extractor.get(input));
     }
 }

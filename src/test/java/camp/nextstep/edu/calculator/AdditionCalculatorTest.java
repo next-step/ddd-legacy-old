@@ -16,7 +16,7 @@ class AdditionCalculatorTest {
 
     @BeforeEach
     void setUp() {
-        calculator = new AdditionCalculator();
+        calculator = new AdditionCalculator(NumbersExtractor.of());
     }
 
     @DisplayName("빈 문자열 또는 null 값 입력 시, 0 반환")
