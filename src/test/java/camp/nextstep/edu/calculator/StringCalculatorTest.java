@@ -1,6 +1,7 @@
 package camp.nextstep.edu.calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,6 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class StringCalculatorTest {
 
@@ -35,6 +37,13 @@ class StringCalculatorTest {
 
 	private static Stream<Arguments> 커스텀_구분자_문자열_덧셈_계산기() {
 		return Stream.of(Arguments.of("//;\n1;2;3", 6));
+	}
+
+	@DisplayName("커스텀 구분자 문자열 덧셈 계산기 - 숫자 이외의 값 이나 음수일 때 RuntimeException 발생")
+	@ParameterizedTest
+	@ValueSource(strings = {"a:1,2", "a,b:-c", "-1,2,3", "1:-2,3", "1:2:-3", "//;\n-1;2;3"})
+	void 기본_문자열_음수(final String text) {
+		assertThatThrownBy(() -> stringCalculator.add(text)).isInstanceOf(RuntimeException.class);
 	}
 
 }
