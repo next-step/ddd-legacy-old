@@ -11,17 +11,10 @@ public class StringCalculator {
         if (Strings.isBlank(text)) {
             return Number.ZERO_VALUE;
         }
-        String[] separatedText = Delimiter.separate(text);
-        return sum(separatedText);
-    }
 
-    private int sum(final String[] separatedText) {
-        List<Number> numbers = new ArrayList<>();
-        for (String text : separatedText) {
-            numbers.add(Number.intValueOf(text));
-        }
-        return numbers.stream()
-                      .mapToInt(Number::getValue)
-                      .sum();
+        String[] separatedText = Delimiter.separate(text);
+        Numbers numbers = Numbers.intValuesOf(separatedText);
+        return numbers.sum()
+                      .getValue();
     }
 }
