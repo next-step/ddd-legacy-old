@@ -9,15 +9,17 @@ import static camp.nextstep.edu.calculator.CustomSeparator.CustomSeparatorType.S
 
 public class CustomSeparator implements Separator {
 
+    private static Pattern pattern = Pattern.compile(PREFIX_MARK.getMark() + "(.)" + SUFFIX_MARK.getMark() + "(.*)");
+
     @Override
     public CalculateInfo getCalculateInfo(String input) {
 
-        Matcher matcher = Pattern.compile(PREFIX_MARK.getMark() + "(.)" + SUFFIX_MARK.getMark() + "(.*)").matcher(input);
+        Matcher matcher = pattern.matcher(input);
         if (matcher.find()) {
             return CalculateInfo.getInstance(Collections.singletonList(matcher.group(1)), matcher.group(2));
         }
 
-        return null;
+        return CalculateInfo.getInstance();
     }
 
     enum CustomSeparatorType {

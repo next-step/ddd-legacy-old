@@ -1,16 +1,11 @@
 package camp.nextstep.edu.calculator;
 
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class StringCalculator {
-
-    private List<Separator> separatorList = Arrays.asList(new CustomSeparator(), new DefaultSeparator());
 
     public int add(String input) {
 
@@ -18,24 +13,18 @@ public class StringCalculator {
             return 0;
         }
 
-        for (Separator separator : separatorList) {
+        Separator separator = SeparatorSelector.getSeparator(input);
 
-            CalculateInfo calculateInfo = separator.getCalculateInfo(input);
-            List<Integer> splitResult = getSplitIntegerList(calculateInfo);
+        CalculateInfo calculateInfo = separator.getCalculateInfo(input);
+        List<Integer> splitResult = getSplitIntegerList(calculateInfo);
 
-            if (CollectionUtils.isEmpty(splitResult)) {
-                continue;
-            }
+        doValidateSplitResult(splitResult);
+        return sum(splitResult);
 
-            doValidateSplitResult(splitResult);
-            return sum(splitResult);
-        }
-
-        throw new RuntimeException();
     }
 
     private List<Integer> getSplitIntegerList(CalculateInfo calculateInfo) {
-        if (Objects.isNull(calculateInfo)) {
+        if (calculateInfo.isEmpty()) {
             return new ArrayList<>();
         }
 
