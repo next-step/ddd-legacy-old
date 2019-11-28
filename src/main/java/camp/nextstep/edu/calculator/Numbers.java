@@ -21,11 +21,11 @@ public final class Numbers {
     }
 
     public Number sum() {
-        int sum = 0;
+        Number sum =  Number.intValueOf("0");
         for (Number number : numbers) {
-            sum += number.getValue();
+            sum.add(number);
         }
-        return Number.intValueOf(String.valueOf(sum));
+        return sum;
     }
 
     @Override

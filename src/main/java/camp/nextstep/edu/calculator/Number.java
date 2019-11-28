@@ -22,6 +22,10 @@ public final class Number {
         return number < ZERO_VALUE;
     }
 
+    public void add(final Number number) {
+        this.value += number.getValue();
+    }
+
     public int getValue() {
         return this.value;
     }
