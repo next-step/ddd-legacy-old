@@ -9,15 +9,15 @@ public final class Numbers {
     private final List<Number> numbers;
 
     private Numbers(List<Number> numbers) {
-        this.numbers = numbers;
+        this.numbers = Collections.unmodifiableList(numbers);
     }
 
-    public static Numbers intValuesOf(String[] separatedText) {
-        List<Number> numbers = new ArrayList<>(separatedText.length);
+    public static Numbers intValuesOf(final String[] separatedText) {
+        final List<Number> numbers = new ArrayList<>(separatedText.length);
         for (String text : separatedText) {
             numbers.add(Number.intValueOf(text));
         }
-        return new Numbers(Collections.unmodifiableList(numbers));
+        return new Numbers(numbers);
     }
 
     public Number sum() {
