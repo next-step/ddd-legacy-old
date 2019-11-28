@@ -21,11 +21,8 @@ public final class Numbers {
     }
 
     public Number sum() {
-        final Number sum =  Number.intValueOf("0");
-        for (final Number number : numbers) {
-            sum.add(number);
-        }
-        return sum;
+        return numbers.stream()
+                      .reduce(Number.intValueOf("0"), Number::add);
     }
 
     @Override
