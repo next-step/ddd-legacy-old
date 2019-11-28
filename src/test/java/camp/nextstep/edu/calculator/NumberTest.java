@@ -49,13 +49,12 @@ class NumberTest {
     @Test
     public void add() {
         // given - Number 객체 생성
-        Number sum = Number.intValueOf("0");
+        Number sum = null;
         Number oneNumber = Number.intValueOf("1");
         Number twoNumber = Number.intValueOf("2");
 
         // when
-        sum.add(oneNumber);
-        sum.add(twoNumber);
+        sum = oneNumber.add(twoNumber);
 
         // then
         assertThat(sum.getValue()).isEqualTo(3);
