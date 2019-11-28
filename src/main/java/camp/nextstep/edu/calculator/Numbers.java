@@ -14,15 +14,15 @@ public final class Numbers {
 
     public static Numbers intValuesOf(final String[] separatedText) {
         final List<Number> numbers = new ArrayList<>(separatedText.length);
-        for (String text : separatedText) {
+        for (final String text : separatedText) {
             numbers.add(Number.intValueOf(text));
         }
         return new Numbers(numbers);
     }
 
     public Number sum() {
-        Number sum =  Number.intValueOf("0");
-        for (Number number : numbers) {
+        final Number sum =  Number.intValueOf("0");
+        for (final Number number : numbers) {
             sum.add(number);
         }
         return sum;
