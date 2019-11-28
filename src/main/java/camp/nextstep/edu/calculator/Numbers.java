@@ -22,7 +22,7 @@ public final class Numbers {
 
     public Number sum() {
         return numbers.stream()
-                      .reduce(Number.intValueOf("0"), Number::add);
+                      .reduce(Number.ZERO_NUMBER, Number::add);
     }
 
     @Override

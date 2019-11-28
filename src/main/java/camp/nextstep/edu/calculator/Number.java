@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public final class Number {
     public static final int ZERO_VALUE = 0;
+    public static final Number ZERO_NUMBER = new Number(ZERO_VALUE);
     private int value;
 
     private Number(final int number) {
