@@ -2,7 +2,9 @@ package camp.nextstep.edu.calculator;
 
 class StringValidator {
 
-    boolean validateFormat(String text) {
-        return text != null && !text.isEmpty();
+    static void checkFormat(String text) {
+        if (text == null || text.isEmpty()){
+            throw new IllegalArgumentException();
+        }
     }
 }
