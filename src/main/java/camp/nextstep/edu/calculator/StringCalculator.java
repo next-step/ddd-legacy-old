@@ -3,25 +3,26 @@ package camp.nextstep.edu.calculator;
 import java.util.Arrays;
 
 class StringCalculator {
+    private static final Integer TEXT_IS_NULL_OR_EMPTY = 0;
     private StringParser parser;
-    private StringValidator stringValidator;
-    private NumberValidator numberValidator;
+    private Number number;
 
-    StringCalculator(StringParser parser, StringValidator stringValidator, NumberValidator numberValidator) {
-        this.parser = parser;
-        this.stringValidator = stringValidator;
-        this.numberValidator = numberValidator;
+    StringCalculator() {
+        this.parser = new StringParser();
+        this.number = new Number();
     }
 
     int add(String text) {
-        if (!stringValidator.validateFormat(text)) {
-            return 0;
+        try {
+            StringValidator.checkFormat(text);
+        } catch (IllegalArgumentException e) {
+            return TEXT_IS_NULL_OR_EMPTY;
         }
 
-        String[] numbers = parser.parse(text);
+        String[] numbers = parser.toStringArrayFrom(text);
 
         return Arrays.stream(numbers)
-            .mapToInt(numberValidator::validatePositive)
+            .mapToInt(number::getPositiveNumber)
             .sum();
     }
 }
