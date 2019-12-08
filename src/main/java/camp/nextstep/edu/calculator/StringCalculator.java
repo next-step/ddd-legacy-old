@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.springframework.util.StringUtils;
-import camp.nextstep.edu.calculator.util.Number;
+import camp.nextstep.edu.calculator.util.Integer;
 
 public class StringCalculator {
 
@@ -41,7 +41,7 @@ public class StringCalculator {
      */
     private int sum(String[] numbers) {
         return Arrays.stream(numbers)
-            .mapToInt(Number::parseInt)
+            .mapToInt(Integer::parsePositiveInt)
             .sum();
     }
 
