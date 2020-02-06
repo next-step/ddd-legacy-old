@@ -1,9 +1,9 @@
 package camp.nextstep.edu.calculator;
 
-import static camp.nextstep.edu.calculator.CalculatorConstants.ZERO;
+import static camp.nextstep.edu.calculator.StringCalculator.ZERO;
 
 public class PositiveNumber {
-    private static final String NOT_ALLOWED_NEGATIVE_NUMBER_EXCEPTION_MESSAGE = "음수를 전달할 수 없습니다.";
+    static final String NOT_ALLOWED_NEGATIVE_NUMBER_EXCEPTION_MESSAGE = "음수를 전달할 수 없습니다.";
     private int value;
 
     public PositiveNumber(int value) {
