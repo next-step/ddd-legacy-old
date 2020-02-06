@@ -15,30 +15,30 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("계산기 객체에 대한 테스트")
-class CalculatorTest {
-    private Calculator calculator;
+class StringCalculatorTest {
+    private StringCalculator stringCalculator;
 
     @BeforeEach
     void setUp() {
-        calculator = new Calculator();
+        stringCalculator = new StringCalculator();
     }
 
-    @DisplayName("Null 또는 빈 문자열을 넘기면 결과값으로 0을 반환한다")
+    @DisplayName("null 또는 빈 문자열을 넘기면 결과값으로 0을 반환한다")
     @ParameterizedTest
     @NullAndEmptySource
-    void Null_또는_빈_문자열을_넘기면_결과값으로_0을_반환한다(String str) {
+    void calculate1(String str) {
         // when:
-        int result = calculator.add(str);
+        int result = stringCalculator.add(str);
         // then:
         assertThat(result).isEqualTo(0);
     }
 
-    @DisplayName("쉼표 구분자로 구성된 숫자 문자열을 넘기면 각 숫자의 합을 반환한다")
+    @DisplayName("쉼표 구분자를 가지는 숫자 문자열을 넘기면 각 숫자의 합을 반환한다")
     @ParameterizedTest
     @MethodSource("expressionProviderWithComma")
-    void 쉼표_구분자로_구성된_숫자_문자열을_넘기면_각_숫자의_합을_반환한다(String str, int expectedResult) {
+    void calculate2(String str, int expectedResult) {
         // when:
-        int result = calculator.add(str);
+        int result = stringCalculator.add(str);
         // then:
         assertThat(result).isEqualTo(expectedResult);
     }
@@ -50,12 +50,12 @@ class CalculatorTest {
         );
     }
 
-    @DisplayName("콜론 구분자로 구성된 숫자 문자열을 넘기면 각 숫자의 합을 반환한다")
+    @DisplayName("콜론 구분자를 가지는 숫자 문자열을 넘기면 각 숫자의 합을 반환한다")
     @ParameterizedTest
     @MethodSource("expressionProviderWithColon")
-    void 콜론_구분자로_구성된_숫자_문자열을_넘기면_각_숫자의_합을_반환한다(String str, int expectedResult) {
+    void calculate3(String str, int expectedResult) {
         // when:
-        int result = calculator.add(str);
+        int result = stringCalculator.add(str);
         // then:
         assertThat(result).isEqualTo(expectedResult);
     }
@@ -67,12 +67,12 @@ class CalculatorTest {
         );
     }
 
-    @DisplayName("쉼표 콜론 구분자가 혼합된 숫자 문자열을 넘기면 각 숫자의 합을 반환한다")
+    @DisplayName("쉼표와 콜론 구분자가 혼합된 숫자 문자열을 넘기면 각 숫자의 합을 반환한다")
     @ParameterizedTest
     @MethodSource("expressionProviderWithCommaAndColon")
-    void 쉼표_콜론_구분자가_혼합된_숫자_문자열을_넘기면_각_숫자의_합을_반환한다(String str, int expectedResult) {
+    void calculate4(String str, int expectedResult) {
         // when:
-        int result = calculator.add(str);
+        int result = stringCalculator.add(str);
         // then:
         assertThat(result).isEqualTo(expectedResult);
     }
@@ -84,12 +84,12 @@ class CalculatorTest {
         );
     }
 
-    @DisplayName("커스텀 구분자로 구성된 숫자 문자열을 넘기면 각 숫자의 합을 반환한다")
+    @DisplayName("커스텀 구분자를 가지는 숫자 문자열을 넘기면 각 숫자의 합을 반환한다")
     @ParameterizedTest
     @MethodSource("expressionProviderWithCustomDelimiter")
-    void 커스텀_구분자로_구성된_숫자_문자열을_넘기면_각_숫자의_합을_반환한다(String str, int expectedResult) {
+    void calculate5(String str, int expectedResult) {
         // when
-        int result = calculator.add(str);
+        int result = stringCalculator.add(str);
         // then:
         assertThat(result).isEqualTo(expectedResult);
     }
@@ -97,27 +97,29 @@ class CalculatorTest {
     private static Stream<Arguments> expressionProviderWithCustomDelimiter() {
         return Stream.of(
                 Arguments.of("//;\n1;2;3", 6),
-                Arguments.of("//;\n5;2;3", 10),
-                Arguments.of("//;\n4;2;3", 9)
+                Arguments.of("//@\n5@2@3", 10),
+                Arguments.of("//%\n4%2%3", 9),
+                Arguments.of("//#\n2#2#3", 7),
+                Arguments.of("//!\n1!2!3", 6)
         );
     }
 
-    @DisplayName("계산기에 숫자 이외의 값을 넘기면 NumberFormatException 예외를 반환한다")
+    @DisplayName("문자열 계산기에 숫자 이외의 값을 넘기면 RuntimeException 예외를 반환한다")
     @Test
-    void 계산기에_숫자_이외의_값을_넘기면_NumberFormatException_예외를_반환한다() {
+    void exception1() {
         // expect:
-        assertThatThrownBy(() -> calculator.add("a,2,3"))
+        assertThatThrownBy(() -> stringCalculator.add("a,2,3"))
                 .isExactlyInstanceOf(NumberFormatException.class);
     }
 
-    @DisplayName("계산기에 음수를 넘기면 IllegalArgumentException 예외를 반환한다")
+    @DisplayName("계산기에 음수를 넘기면 RuntimeException 예외를 반환한다")
     @ParameterizedTest
     @ValueSource(strings = {"-1,2,3", "1,-2,3", "1,2,-3"})
-    void 계산기에_음수를_넘기면_IllegalArgumentException_예외를_반환한다(String str) {
+    void exception2(String text) {
         // expect:
-        assertThatThrownBy(() -> calculator.add(str))
+        assertThatThrownBy(() -> stringCalculator.add(text))
                 .isExactlyInstanceOf(IllegalArgumentException.class)
-                .hasMessage(Calculator.NOT_ALLOWED_NEGATIVE_NUMBER_EXCEPTION_MESSAGE);
+                .hasMessage(PositiveNumber.NOT_ALLOWED_NEGATIVE_NUMBER_EXCEPTION_MESSAGE);
     }
 }
 
